@@ -1,8 +1,11 @@
 [build]
-  publish = "public" # This tells Netlify where your static files are
-  functions = "netlify/functions" # This tells Netlify where your functions are
+  publish = "public"
+  command = "npm install && npm run build" # Assumes you have a build script, will create one if needed
 
-# Optional: If you want to use a specific Node.js version for functions
 [functions]
-  node_bundler = "esbuild" # Or "zip"
-  node_version = "18" # Or "20"
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
