@@ -40,21 +40,27 @@
             <div class="stat-cards">
                 <div class="stat-card">
                     <div class="value-wrapper">
-                        <div class="value" id="career-points">0.0</div>
+                        <div class="value" id="career-points">0</div>
                     </div>
                     <div class="label">PTS</div>
                 </div>
                 <div class="stat-card">
                     <div class="value-wrapper">
-                        <div class="value" id="career-assists">0.0</div>
+                        <div class="value" id="career-assists">0</div>
                     </div>
                     <div class="label">AST</div>
                 </div>
                 <div class="stat-card">
                     <div class="value-wrapper">
-                        <div class="value" id="career-rebounds">0.0</div>
+                        <div class="value" id="career-rebounds">0</div>
                     </div>
                     <div class="label">REB</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value-wrapper">
+                        <div class="value" id="career-ha">0</div>
+                    </div>
+                    <div class="label">HA</div>
                 </div>
             </div>
 
@@ -64,10 +70,12 @@
                     <tr>
                         <th>Date</th>
                         <th>Opponent</th>
-                        <th>Score</th>
+                        <th>Result</th>
                         <th>PTS</th>
                         <th>REB</th>
                         <th>AST</th>
+                        <th>HA</th>
+                        <th>MIN</th>
                         </tr>
                 </thead>
                 <tbody id="player-game-log">
@@ -95,7 +103,6 @@
     </div>
 
     <script>
-        // This script runs when the player.html page loads
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const playerName = urlParams.get('name'); // Get player name from URL
@@ -103,6 +110,8 @@
             if (playerName) {
                 document.getElementById('player-name-display').innerText = playerName.toUpperCase();
                 document.getElementById('player-page-title').innerText = `${playerName} Profile`;
+                // Assumes player-meta-display has something to show, e.g., fetched position later
+                // document.getElementById('player-meta-display').innerText = `#XX • ${positionFromData}`;
                 loadPlayerPage(playerName); // Call the function from main.js
             } else {
                 document.getElementById('player-name-display').innerText = 'Player Not Found';

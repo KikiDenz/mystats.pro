@@ -1,8 +1,8 @@
 // public/js/main.js
 
 // Replace these with the actual "Published to web" CSV URLs for your Google Sheet tabs
-const TEAM_GAMES_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=1049036746&single=true&output=csv';
-const PLAYER_STATS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=0&single=true&output=csv';
+const TEAM_GAMES_CSV_URL = 'YOUR_PUBLISHED_TEAM_GAMES_CSV_URL';
+const PLAYER_STATS_CSV_URL = 'YOUR_PUBLISHED_PLAYER_STATS_CSV_URL';
 
 /**
  * Fetches CSV data from a given URL and parses it using PapaParse.
@@ -31,20 +31,26 @@ async function loadPlayerPage(playerName) {
     const playerStatsData = await fetchCsvData(PLAYER_STATS_CSV_URL);
     const gameStatsData = await fetchCsvData(TEAM_GAMES_CSV_URL);
 
-    // Filter stats for the current player
-    const filteredPlayerStats = playerStatsData.filter(stat => stat.player_name === playerName);
+    // Filter stats for the current player (using player_first and player_sur for full name)
+    const filteredPlayerStats = playerStatsData.filter(stat =>
+        `${stat.player_first} ${stat.player_sur}`.trim() === playerName.trim()
+    );
 
     // --- Calculate Career Totals ---
     let careerTotals = {
         games: 0,
-        points: 0,
-        rebounds: 0,
-        assists: 0,
-        steals: 0,
-        blocks: 0,
-        turnovers: 0,
-        minutes_played: 0,
-        fouls: 0
+        pts: 0,
+        totrb: 0,
+        ast: 0,
+        ha: 0, // NEW
+        stl: 0,
+        blk: 0,
+        to: 0,
+        min: 0,
+        fg: 0, fga: 0,
+        '3p': 0, '3pa': 0,
+        ft: 0, fta: 0,
+        or: 0, dr: 0
     };
 
     const playedGameIds = new Set(); // To count unique games played
@@ -54,52 +60,53 @@ async function loadPlayerPage(playerName) {
             careerTotals.games++;
             playedGameIds.add(stat.game_id);
         }
-        careerTotals.points += stat.points || 0;
-        careerTotals.rebounds += stat.rebounds || 0;
-        careerTotals.assists += stat.assists || 0;
-        careerTotals.steals += stat.steals || 0;
-        careerTotals.blocks += stat.blocks || 0;
-        careerTotals.turnovers += stat.turnovers || 0;
-        careerTotals.minutes_played += stat.minutes_played || 0;
-        careerTotals.fouls += stat.fouls || 0;
+        careerTotals.pts += stat.pts || 0;
+        careerTotals.totrb += stat.totrb || 0;
+        careerTotals.ast += stat.ast || 0;
+        careerTotals.ha += stat.ha || 0; // NEW
+        careerTotals.stl += stat.stl || 0;
+        careerTotals.blk += stat.blk || 0;
+        careerTotals.to += stat.to || 0;
+        careerTotals.min += stat.min || 0;
+        careerTotals.fg += stat.fg || 0;
+        careerTotals.fga += stat.fga || 0;
+        careerTotals['3p'] += stat['3p'] || 0;
+        careerTotals['3pa'] += stat['3pa'] || 0;
+        careerTotals.ft += stat.ft || 0;
+        careerTotals.fta += stat.fta || 0;
+        careerTotals.or += stat.or || 0;
+        careerTotals.dr += stat.dr || 0;
     });
 
-    // Update the player name display
-    const playerNameElement = document.getElementById('player-name-display');
-    if (playerNameElement) playerNameElement.innerText = playerName;
+    // Update the player name display (already handled in player.html script)
+    // document.getElementById('player-name-display').innerText = playerName;
 
     // Update career total elements (example IDs, adjust as needed in HTML)
-    document.getElementById('career-points')?.innerText = careerTotals.points.toFixed(1); // Avg or Total?
-    document.getElementById('career-assists')?.innerText = careerTotals.assists.toFixed(1); // Avg or Total?
-    // You can add more elements for other totals like rebounds, blocks, etc.
+    document.getElementById('career-points')?.innerText = careerTotals.pts.toFixed(0);
+    document.getElementById('career-assists')?.innerText = careerTotals.ast.toFixed(0);
+    document.getElementById('career-rebounds')?.innerText = careerTotals.totrb.toFixed(0);
+    document.getElementById('career-ha')?.innerText = careerTotals.ha.toFixed(0); // NEW: Display Hockey Assists
+    // You can add more elements for other totals like steals, blocks, etc.
 
     // --- Populate Player Game Log Table ---
     const playerGameLogTableBody = document.querySelector('#player-game-log tbody');
     if (playerGameLogTableBody) {
         playerGameLogTableBody.innerHTML = ''; // Clear existing rows
 
-        // Sort stats by date (assuming gameStatsData has dates)
-        filteredPlayerStats.sort((a, b) => {
-            const gameA = gameStatsData.find(g => g.game_id === a.game_id);
-            const gameB = gameStatsData.find(g => g.game_id === b.game_id);
-            if (gameA && gameB) {
-                return new Date(gameB.date) - new Date(gameA.date); // Most recent first
-            }
-            return 0;
-        });
+        // Sort stats by date
+        filteredPlayerStats.sort((a, b) => new Date(b.date) - new Date(a.date)); // Most recent first
 
         filteredPlayerStats.forEach(stat => {
-            const game = gameStatsData.find(g => g.game_id === stat.game_id);
-            if (game) {
-                const row = playerGameLogTableBody.insertRow();
-                row.insertCell().innerText = game.date;
-                row.insertCell().innerText = game.team1 === stat.team_name ? game.team2 : game.team1; // Opponent
-                row.insertCell().innerText = `${game.score_team1}-${game.score_team2}`; // Final Score
-                row.insertCell().innerText = stat.points;
-                row.insertCell().innerText = stat.rebounds;
-                row.insertCell().innerText = stat.assists;
-                // Add more cells for other stats if your table has them
-            }
+            const row = playerGameLogTableBody.insertRow();
+            row.insertCell().innerText = stat.date;
+            row.insertCell().innerText = stat.opponent; // Opponent is now directly in player stats
+            row.insertCell().innerText = `${stat.team === gameStatsData.find(g => g.game_id === stat.game_id)?.winner ? 'W' : 'L'}`; // Simplified W/L logic (needs actual game score logic for score)
+            row.insertCell().innerText = stat.pts;
+            row.insertCell().innerText = stat.totrb;
+            row.insertCell().innerText = stat.ast;
+            row.insertCell().innerText = stat.ha; // NEW: Display HA
+            row.insertCell().innerText = stat.min;
+            // Add more cells for other stats if your table has them, e.g., fg, fga, 3p, 3pa, etc.
         });
     }
 
@@ -113,7 +120,7 @@ async function loadPlayerPage(playerName) {
  */
 async function loadTeamPage(teamName) {
     const gameStatsData = await fetchCsvData(TEAM_GAMES_CSV_URL);
-    const playerStatsData = await fetchCsvData(PLAYER_STATS_CSV_URL); // Useful for roster info
+    const playerStatsData = await fetchCsvData(PLAYER_STATS_CSV_URL);
 
     // Filter games involving this team
     const teamGames = gameStatsData.filter(game => game.team1 === teamName || game.team2 === teamName);
@@ -153,7 +160,7 @@ async function loadTeamPage(teamName) {
     const teamRosterList = document.getElementById('team-roster');
     if (teamRosterList) {
         teamRosterList.innerHTML = '';
-        const teamPlayers = new Set(playerStatsData.filter(p => p.team_name === teamName).map(p => p.player_name));
+        const teamPlayers = new Set(playerStatsData.filter(p => p.team === teamName).map(p => `${p.player_first} ${p.player_sur}`));
         teamPlayers.forEach(player => {
             const li = document.createElement('li');
             li.innerHTML = `<a href="player.html?name=${encodeURIComponent(player)}">${player}</a>`;
@@ -162,6 +169,4 @@ async function loadTeamPage(teamName) {
     }
 }
 
-// --- Form Submission Handlers (same as before) ---
-// These will be in the add-game.html and add-player-stats.html <script> tags directly for simplicity.
-// No changes needed from the previous add-game.html and add-player-stats.html script blocks.
+// --- Form Submission Handlers (unchanged, still in add-game.html and add-player-stats.html script blocks) ---

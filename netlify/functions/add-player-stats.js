@@ -1,4 +1,5 @@
 const { google } = require('googleapis');
+const { GoogleAuth } = require('google-auth-library');
 
 exports.handler = async (event, context) => {
     if (event.httpMethod !== 'POST') {
@@ -8,15 +9,17 @@ exports.handler = async (event, context) => {
     try {
         const data = JSON.parse(event.body);
 
-        // You'll need to pass game_id from the frontend for linking
-        const requiredFields = ['game_id', 'player_name', 'team_name', 'points', 'rebounds', 'assists', 'minutes_played']; // Adjust as needed
+        // Updated required fields - now includes 'date', 'player_first', 'player_sur', 'team', 'opponent', 'min', 'pts'
+        const requiredFields = [
+            'game_id', 'date', 'player_first', 'player_sur', 'team', 'opponent', 'min', 'pts'
+        ];
         for (const field of requiredFields) {
             if (!data[field]) {
                 return { statusCode: 400, body: `Missing required field: ${field}` };
             }
         }
 
-        const auth = new google.auth.GoogleAuth({
+        const auth = new GoogleAuth({
             credentials: {
                 client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
                 private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
@@ -27,25 +30,38 @@ exports.handler = async (event, context) => {
         const sheets = google.sheets({ version: 'v4', auth });
 
         const spreadsheetId = process.env.GOOGLE_SPREADSHEET_ID;
-        const range = 'Player_Stats!A:L'; // Tab name and columns to append to
+        // Adjust range to cover all new columns (A to X for 'pts')
+        const range = 'Player_Stats!A:X';
 
-        // Generate a simple stat_entry_id
         const statEntryId = `S_${Date.now()}`;
 
+        // Ensure all fields are included in the correct order, with defaults for numbers
         const values = [
             [
                 statEntryId,
-                data.game_id, // Important for linking
-                data.player_name,
-                data.team_name,
-                data.points,
-                data.rebounds,
-                data.assists,
-                data.steals || 0, // Default to 0 if not provided
-                data.blocks || 0,
-                data.turnovers || 0,
-                data.minutes_played,
-                data.fouls || 0
+                data.game_id,
+                data.date,          // New
+                data.player_first,  // New
+                data.player_sur,    // New
+                data.position || '', // New, default to empty string
+                data.team,          // Renamed from team_name
+                data.opponent,      // New
+                data.min || 0,      // Renamed from minutes_played
+                data.fg || 0,       // New
+                data.fga || 0,      // New
+                data['3p'] || 0,    // New (use bracket notation for '3p')
+                data['3pa'] || 0,   // New (use bracket notation for '3pa')
+                data.ft || 0,       // New
+                data.fta || 0,      // New
+                data.or || 0,       // New
+                data.dr || 0,       // New
+                data.totrb || 0,    // Renamed from rebounds
+                data.ast || 0,      // Renamed from assists
+                data.ha || 0,       // NEW: Hockey Assists
+                data.stl || 0,      // Renamed from steals
+                data.blk || 0,      // Renamed from blocks
+                data.to || 0,       // Renamed from turnovers
+                data.pts || 0       // Renamed from points
             ],
         ];
 

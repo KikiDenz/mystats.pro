@@ -21,35 +21,71 @@
                 <label for="gameId">Game ID:</label>
                 <input type="text" id="gameId" name="game_id" placeholder="e.g., G_1678888888888" required><br>
 
-                <label for="playerName">Player Name:</label>
-                <input type="text" id="playerName" name="player_name" required><br>
+                <label for="gameDate">Date:</label>
+                <input type="date" id="gameDate" name="date" required><br>
 
-                <label for="teamName">Team Name (of player):</label>
-                <input type="text" id="teamName" name="team_name" required><br>
+                <label for="playerFirst">Player First Name:</label>
+                <input type="text" id="playerFirst" name="player_first" required><br>
 
-                <label for="points">Points:</label>
-                <input type="number" id="points" name="points" value="0"><br>
+                <label for="playerSur">Player Surname:</label>
+                <input type="text" id="playerSur" name="player_sur" required><br>
 
-                <label for="rebounds">Rebounds:</label>
-                <input type="number" id="rebounds" name="rebounds" value="0"><br>
+                <label for="position">Position:</label>
+                <input type="text" id="position" name="position" placeholder="e.g., PG, SF, C"><br>
 
-                <label for="assists">Assists:</label>
-                <input type="number" id="assists" name="assists" value="0"><br>
+                <label for="team">Team Name (Player's Team):</label>
+                <input type="text" id="team" name="team" required><br>
 
-                <label for="steals">Steals:</label>
-                <input type="number" id="steals" name="steals" value="0"><br>
+                <label for="opponent">Opponent Team Name:</label>
+                <input type="text" id="opponent" name="opponent" required><br>
 
-                <label for="blocks">Blocks:</label>
-                <input type="number" id="blocks" name="blocks" value="0"><br>
+                <label for="min">Minutes Played:</label>
+                <input type="number" id="min" name="min" value="0" required><br>
 
-                <label for="turnovers">Turnovers:</label>
-                <input type="number" id="turnovers" name="turnovers" value="0"><br>
+                <label for="fg">Field Goals Made:</label>
+                <input type="number" id="fg" name="fg" value="0"><br>
 
-                <label for="minutesPlayed">Minutes Played:</label>
-                <input type="number" id="minutesPlayed" name="minutes_played" value="0" required><br>
+                <label for="fga">Field Goals Attempted:</label>
+                <input type="number" id="fga" name="fga" value="0"><br>
 
-                <label for="fouls">Fouls:</label>
-                <input type="number" id="fouls" name="fouls" value="0"><br>
+                <label for="3p">3-Pointers Made:</label>
+                <input type="number" id="3p" name="3p" value="0"><br>
+
+                <label for="3pa">3-Pointers Attempted:</label>
+                <input type="number" id="3pa" name="3pa" value="0"><br>
+
+                <label for="ft">Free Throws Made:</label>
+                <input type="number" id="ft" name="ft" value="0"><br>
+
+                <label for="fta">Free Throws Attempted:</label>
+                <input type="number" id="fta" name="fta" value="0"><br>
+
+                <label for="or">Offensive Rebounds:</label>
+                <input type="number" id="or" name="or" value="0"><br>
+
+                <label for="dr">Defensive Rebounds:</label>
+                <input type="number" id="dr" name="dr" value="0"><br>
+
+                <label for="totrb">Total Rebounds:</label>
+                <input type="number" id="totrb" name="totrb" value="0"><br>
+
+                <label for="ast">Assists:</label>
+                <input type="number" id="ast" name="ast" value="0"><br>
+
+                <label for="ha">Hockey Assists:</label>
+                <input type="number" id="ha" name="ha" value="0"><br>
+
+                <label for="stl">Steals:</label>
+                <input type="number" id="stl" name="stl" value="0"><br>
+
+                <label for="blk">Blocks:</label>
+                <input type="number" id="blk" name="blk" value="0"><br>
+
+                <label for="to">Turnovers:</label>
+                <input type="number" id="to" name="to" value="0"><br>
+
+                <label for="pts">Points:</label>
+                <input type="number" id="pts" name="pts" value="0" required><br>
 
                 <button type="submit">Add Stats</button>
             </form>
@@ -81,15 +117,14 @@
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
 
-                // Convert numbers to actual numbers
-                data.points = parseInt(data.points);
-                data.rebounds = parseInt(data.rebounds);
-                data.assists = parseInt(data.assists);
-                data.steals = parseInt(data.steals);
-                data.blocks = parseInt(data.blocks);
-                data.turnovers = parseInt(data.turnovers);
-                data.minutes_played = parseInt(data.minutes_played);
-                data.fouls = parseInt(data.fouls);
+                // Convert numbers to actual numbers, handle '3p' and '3pa'
+                const numberFields = [
+                    'min', 'fg', 'fga', '3p', '3pa', 'ft', 'fta', 'or', 'dr',
+                    'totrb', 'ast', 'ha', 'stl', 'blk', 'to', 'pts'
+                ];
+                numberFields.forEach(field => {
+                    data[field] = parseInt(data[field] || '0', 10);
+                });
 
                 const messageElement = document.getElementById('playerStatsMessage');
                 messageElement.innerText = 'Adding player stats...';
