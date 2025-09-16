@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>mystats.pro — Player</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="theme-light">
+  <header class="site-header">
+    <a class="site-title" href="./">mystats<span class="dot">.</span>pro</a>
+    <div class="header-actions">
+      <a id="playerSwitcher" class="select-link" href="#">Switch player</a>
+      <button id="themeToggle" class="btn">Dark</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="player-hero">
+      <div class="avatar" id="playerAvatar" aria-hidden="true">🏀</div>
+      <div class="titles">
+        <h1 id="playerName">Player</h1>
+        <div class="sub" id="playerSub">#– • –</div>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <a id="tab-averages" href="#" class="tab active" data-view="averages">Averages</a>
+      <a id="tab-logs" href="#" class="tab" data-view="logs">Game Logs</a>
+      <a id="tab-bio" href="#" class="tab" data-view="bio">Bio</a>
+    </nav>
+
+    <section id="view-averages" class="view active">
+      <div class="bubble-row">
+        <button class="bubble active" data-bubble="career">Career</button>
+        <button class="bubble" data-bubble="season">Season</button>
+        <button class="bubble" data-bubble="totals">Career Totals</button>
+        <button class="bubble" data-bubble="highs">Game Highs</button>
+      </div>
+      <div class="controls">
+        <label class="label">Season:</label>
+        <select id="seasonSelect" class="select"></select>
+      </div>
+      <div id="averagesSummary" class="cards two"></div>
+      <div id="averagesTable" class="table-wrap"></div>
+    </section>
+
+    <section id="view-logs" class="view">
+      <div class="controls">
+        <label class="label">Season:</label>
+        <select id="logSeasonSelect" class="select"></select>
+      </div>
+      <div id="logsTable" class="table-wrap"></div>
+    </section>
+
+    <section id="view-bio" class="view">
+      <div id="bioBlock" class="bio-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">mystats.pro • <a id="rawLink" target="_blank" rel="noreferrer">Raw CSV</a></footer>
+<!-- 
+  <script src="./js/util.js"></script> -->
+  <script src="./js/player.js"></script>
+  <script type="module" src="./js/player.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>mystats.pro — Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="theme-light">
+  <header class="site-header">
+    <div class="site-title">mystats<span class="dot">.</span>pro</div>
+    <div class="header-actions">
+      <select id="teamSelect" class="select">
+        <option value="sweatyAlready">Sweaty Already</option>
+        <option value="prettyGood">Pretty Good</option>
+        <option value="duncles">Duncles</option>
+      </select>
+      <button id="themeToggle" class="btn">Dark</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="cards two">
+      <div class="card" id="teamRecord">
+        <div class="card-title">Record</div>
+        <div class="metric" id="recordValue">–</div>
+        <div class="sub">W – L</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Roster</div>
+        <div id="rosterList" class="roster"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">Recent Games</div>
+      <div id="gamesTable" class="table-wrap"></div>
+    </section>
+  </main>
+
+  <footer class="footer">Built with ❤️ for local hoops • <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub Pages</a></footer>
+
+  <!-- <script src="./js/util.js"></script> -->
+  <script src="./js/team.js"></script>
+  <script type="module" src="./js/team.js"></script>
+</body>
+</html>
