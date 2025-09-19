@@ -4,18 +4,20 @@
     "name": "Kyle Denzin",
     "number": "37",
     "position": "Guard",
-    "image": "assets/kyle-denzin.png",
+    "image": "assets/kyle-denzin",
     "teams": [
       "pretty-good"
+      "sweaty-already"
+      "Duncles"
     ],
-    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=0&single=true&output=csv"
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pubhtml?gid=0&single=true"
   },
   {
     "slug": "levi-denzin",
     "name": "Levi Denzin",
     "number": "43",
     "position": "Forward",
-    "image": "assets/levi-denzin.png",
+    "image": "assets/levi-denzin",
     "teams": [
       "pretty-good"
     ],
@@ -90,17 +92,6 @@
     "csvUrl": ""
   },
   {
-    "slug": "kyle-denzin-0",
-    "name": "Kyle Denzin",
-    "number": "0",
-    "position": "Guard",
-    "image": "assets/kyle-denzin.png",
-    "teams": [
-      "duncles"
-    ],
-    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=0&single=true&output=csv"
-  },
-  {
     "slug": "codey-nowland",
     "name": "Codey Nowland",
     "number": "00",
@@ -111,15 +102,4 @@
     ],
     "csvUrl": ""
   },
-  {
-    "slug": "kyle-denzin-10",
-    "name": "Kyle Denzin",
-    "number": "10",
-    "position": "Guard",
-    "image": "assets/kyle-denzin.png",
-    "teams": [
-      "sweaty-already"
-    ],
-    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=0&single=true&output=csv"
-  }
 ]
