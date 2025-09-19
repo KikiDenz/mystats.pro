@@ -40,7 +40,7 @@
     "name": "Jackson Neaves",
     "number": "10",
     "position": "Center",
-    "image": "assets/jackson-neaves.png",
+    "image": "assets/placeholder1.png",
     "teams": [
       "pretty-good",
       "chuckers-chuckers"
@@ -51,55 +51,55 @@
     "slug": "josh-todd",
     "name": "Josh Todd",
     "number": "",
-    "position": "",
-    "image": "assets/josh-todd.png",
+    "position": "Forward",
+    "image": "assets/placeholder2.png",
     "teams": [
       "pretty-good"
     ],
-    "csvUrl": ""
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=2116571222&single=true&output=csv"
   },
   {
     "slug": "rhys-ogle",
     "name": "Rhys Ogle",
     "number": "",
-    "position": "",
-    "image": "assets/rhys-ogle.png",
+    "position": "Forward",
+    "image": "assets/placeholder2.png",
     "teams": [
       "pretty-good"
     ],
-    "csvUrl": ""
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=298458955&single=true&output=csv"
   },
   {
     "slug": "jarren-owen",
     "name": "Jarren Owen",
     "number": "",
-    "position": "",
-    "image": "assets/jarren-owen.png",
+    "position": "Guard",
+    "image": "assets/placeholder1.png",
     "teams": [
       "pretty-good"
     ],
-    "csvUrl": ""
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=1191745424&single=true&output=csv"
   },
   {
     "slug": "callan-beamish",
     "name": "Callan Beamish",
     "number": "",
-    "position": "",
-    "image": "assets/callan-beamish.png",
+    "position": "Center",
+    "image": "assets/placeholder2.png",
     "teams": [
       "pretty-good"
     ],
-    "csvUrl": ""
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=430866216&single=true&output=csv"
   },
   {
     "slug": "codey-nowland",
     "name": "Codey Nowland",
     "number": "00",
     "position": "Guard",
-    "image": "assets/codey-nowland.png",
+    "image": "assets/placeholder1.png",
     "teams": [
       "sweaty-already"
     ],
-    "csvUrl": ""
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=849349567&single=true&output=csv"
   }
 ]
