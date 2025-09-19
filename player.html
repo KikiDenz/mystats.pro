@@ -2,69 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>mystats.pro — Player</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Player — mystats.pro</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="theme-light">
-  <header class="site-header">
-    <a class="site-title" href="./">mystats<span class="dot">.</span>pro</a>
-    <div class="header-actions">
-      <a id="playerSwitcher" class="select-link" href="#">Switch player</a>
-      <button id="themeToggle" class="btn">Dark</button>
+<body>
+<header class="header">
+  <div class="brand"><a href="index.html" class="badge">mystats.pro</a></div>
+  <div class="actions">
+    <div class="search"><input id="search" placeholder="Search team or player"/></div>
+    <button id="theme-toggle" class="toggle">Dark mode</button>
+  </div>
+</header>
+<main class="container vstack">
+  <div id="validator" class="toast" style="display:none"></div>
+  <div class="player-hero card">
+    <img id="player-img" alt="player"/>
+    <div class="vstack">
+      <div style="font-size:28px; font-weight:800;" id="player-name"></div>
+      <div id="player-meta" style="color:var(--muted)"></div>
+      <div class="hstack">
+        <label>Team:</label>
+        <select id="team-filter" class="select"></select>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main class="container">
-    <section class="player-hero">
-      <div class="avatar" id="playerAvatar" aria-hidden="true">🏀</div>
-      <div class="titles">
-        <h1 id="playerName">Player</h1>
-        <div class="sub" id="playerSub">#– • –</div>
+  <section class="section">
+    <div class="hstack" style="justify-content: space-between;">
+      <div class="tabs">
+        <button class="tab" id="tab-career">Career</button>
+        <button class="tab" id="tab-season">Season</button>
       </div>
-    </section>
-
-    <nav class="tabs">
-      <a id="tab-averages" href="#" class="tab active" data-view="averages">Averages</a>
-      <a id="tab-logs" href="#" class="tab" data-view="logs">Game Logs</a>
-      <a id="tab-bio" href="#" class="tab" data-view="bio">Bio</a>
-    </nav>
-
-    <section id="view-averages" class="view active">
-      <div class="bubble-row">
-        <button class="bubble active" data-bubble="career">Career</button>
-        <button class="bubble" data-bubble="season">Season</button>
-        <button class="bubble" data-bubble="totals">Career Totals</button>
-        <button class="bubble" data-bubble="highs">Game Highs</button>
+      <div class="hstack">
+        <label for="season-year">Year</label>
+        <select id="season-year" class="select"></select>
       </div>
-      <div class="controls">
-        <label class="label">Season:</label>
-        <select id="seasonSelect" class="select"></select>
-      </div>
-      <div id="averagesSummary" class="cards two"></div>
-      <div id="averagesTable" class="table-wrap"></div>
-    </section>
+    </div>
+    
+    <div class="kpis section">
+      <div class="kpi"><div class="bubble" id="c-pts">0.0</div><div class="label">PTS</div></div>
+      <div class="kpi"><div class="bubble" id="c-trb">0.0</div><div class="label">REB</div></div>
+      <div class="kpi"><div class="bubble" id="c-ast">0.0</div><div class="label">AST</div></div>
+      <div class="kpi"><div class="bubble" id="c-fg">0%</div><div class="label">FG%</div></div>
+      <div class="kpi"><div class="bubble" id="c-3p">0%</div><div class="label">3P%</div></div>
+      <div class="kpi"><div class="bubble" id="c-ft">0%</div><div class="label">FT%</div></div>
+    </div>
+  </section>
+    
 
-    <section id="view-logs" class="view">
-      <div class="controls">
-        <label class="label">Season:</label>
-        <select id="logSeasonSelect" class="select"></select>
-      </div>
-      <div id="logsTable" class="table-wrap"></div>
-    </section>
-
-    <section id="view-bio" class="view">
-      <div id="bioBlock" class="bio-grid"></div>
-    </section>
-  </main>
-
-  <footer class="footer">mystats.pro • <a id="rawLink" target="_blank" rel="noreferrer">Raw CSV</a></footer>
-<!-- 
-  <script src="./js/util.js"></script> -->
-  <script src="./js/player.js"></script>
-  <script type="module" src="./js/player.js"></script>
+  <section class="section">
+    <h3>Game Log</h3>
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Team</th>
+            <th>Opp</th>
+            <th>MIN</th>
+            <th>FG</th>
+            <th>3P</th>
+            <th>FT</th>
+            <th>OR</th>
+            <th>DR</th>
+            <th>TRB</th>
+            <th>AST</th>
+            <th>STL</th>
+            <th>BLK</th>
+            <th>TOV</th>
+            <th>PTS</th>
+          </tr>
+        </thead>
+        <tbody id="gamelog-body"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<footer class="footer container">© <span id="year"></span> mystats.pro</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script type="module" src="js/player.js"></script>
 </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team — mystats.pro</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+  <div class="brand"><a href="index.html" class="badge">mystats.pro</a></div>
+  <div class="actions">
+    <div class="search"><input id="search" placeholder="Search team or player"/></div>
+    <button id="theme-toggle" class="toggle">Dark mode</button>
+  </div>
+</header>
+<main class="container">
+  <div class="banner">
+    <div class="banner-inner" id="team-banner">
+      <img id="team-logo" class="logo" alt="logo"/>
+      <div class="title" id="team-name"></div>
+      <div class="spacer"></div>
+      <div class="pill" style="background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.35); color:#fff;">Record: <span id="record">0-0</span></div>
+    </div>
+  </div>
+  <div id="validator" class="toast" style="display:none"></div>
+  <section class="section">
+    <h3>Roster</h3>
+    <div id="roster" class="hstack"></div>
+  </section>
+
+  <section class="section">
+    <h3>Game Log</h3>
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Matchup</th>
+            <th>Score</th>
+            <th>Result</th>
+            <th>Season</th>
+          </tr>
+        </thead>
+        <tbody id="gamelog-body"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<footer class="footer container">© <span id="year"></span> mystats.pro</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script type="module" src="js/team.js"></script>
+</body>
+</html>

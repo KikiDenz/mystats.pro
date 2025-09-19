@@ -1,204 +1,150 @@
-import { CSV, $, $all, renderTable, bindThemeToggle, groupBy, sum, avg, maxBy, toNum } from "./util.js";
+import { initThemeToggle, fetchCsv, computePlayerAverages, byYear, loadJSON, initSearch, pct, oneDec } from './app.js';
 
-// Map player name to their CSV and metadata
-const PLAYERS = {
-  "Kyle Denzin": {
-    number: 22, pos: "G", team: "Sweaty Already",
-    csv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=0&single=true&output=csv",
-    bio: { Height:"—", Weight:"—", College:"—", Country:"Australia", Wingspan:"—", Birthday:"—" }
-  },
-  "Levi Denzin": {
-    number: 28, pos: "G/F", team: "Sweaty Already",
-    csv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=2091114860&single=true&output=csv",
-    bio: { Height:"—", Weight:"—", College:"—", Country:"Australia", Wingspan:"—", Birthday:"—" }
-  },
-  "Findlay Wendtman": {
-    number: 1, pos: "F", team: "Sweaty Already",
-    csv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=863688176&single=true&output=csv",
-    bio: { Height:"—", Weight:"—", College:"—", Country:"Australia", Wingspan:"—", Birthday:"—" }
-  },
-};
+const REQUIRED_PLAYER_COLS = ['date','position','team','opponent','min','fg','fga','3p','3pa','ft','fta','or','dr','totrb','ass','pf','st','bs','to','pts'];
+function validateColumns(rows, required){
+  if (!rows || !rows.length) return required;
+  const keys = Object.keys(rows[0]||{});
+  return required.filter(k => !keys.includes(k));
+}
 
-function getQuery(name){
-  const url = new URL(location.href);
+function getParam(name) {
+  const url = new URL(window.location.href);
   return url.searchParams.get(name);
 }
-function setTabs(active){
-  $all(".tab").forEach(t=>t.classList.toggle("active", t.dataset.view===active));
-  $all(".view").forEach(v=>v.classList.toggle("active", v.id===`view-${active}`));
+function getSeasonParam() {
+  const url = new URL(window.location.href);
+  const s = url.searchParams.get('season');
+  return s && /^\d{4}$/.test(s) ? s : null;
 }
-function bindTabs(){
-  $all(".tab").forEach(t=>{
-    t.addEventListener("click", e=>{ e.preventDefault(); setTabs(t.dataset.view); history.replaceState({}, "", `?name=${encodeURIComponent(currentName)}&view=${t.dataset.view}`); });
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+function fillCircles(stats){
+  document.getElementById("c-pts").textContent = oneDec(stats.pts);
+  document.getElementById("c-trb").textContent = oneDec(stats.trb);
+  document.getElementById("c-ast").textContent = oneDec(stats.ast);
+  document.getElementById("c-fg").textContent  = pct(stats.fgPct);
+  document.getElementById("c-3p").textContent  = pct(stats.tpPct);
+  document.getElementById("c-ft").textContent  = pct(stats.ftPct);
+}
+
+async function init() {
+  initThemeToggle();
+  initSearch();
+  const slug = getParam("player");
+  const players = await loadJSON("data/players.json");
+  const me = players.find(p => p.slug === slug) || players[0];
+
+  document.getElementById("player-name").textContent = me.name;
+  document.getElementById("player-meta").textContent = `#${me.number} • ${me.position}`;
+  document.getElementById("player-img").src = me.image;
+
+  // Load player CSV (if present)
+  let rows = [];
+  if (me.csvUrl) {
+    rows = await fetchCsv(me.csvUrl);
+  const missing = validateColumns(rows, REQUIRED_PLAYER_COLS);
+  const v = document.getElementById('validator');
+  if (missing.length) { v.style.display='block'; v.innerHTML = `<strong>Heads up:</strong> Missing columns in player sheet → ${missing.join(', ')}`;}
+  }
+  // Build team filter if multiple
+  const teamSel = document.getElementById("team-filter");
+  teamSel.innerHTML = "";
+  (me.teams || []).forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t;
+    opt.textContent = t.replaceAll('-', ' ').replace(/\b\w/g, c=>c.toUpperCase());
+    teamSel.appendChild(opt);
   });
-}
 
-let currentName = getQuery("name") || "Kyle Denzin";
-let currentView = getQuery("view") || "averages";
+  // Year tabs (season vs career)
+  const yearGroups = byYear(rows);
+  const years = Object.keys(yearGroups).filter(y=>y !== 'Unknown').sort();
+  const latest = years.length ? years[years.length-1] : null;
 
-let rawData = null; // {header, rows}
-let numericCols = []; // auto-detected numeric stat keys
-let seasonKey = null; // attempt to detect a "Season" column
-let dateKey = null; // date column if exists
+  // Tabs
+  const tabCareer = document.getElementById("tab-career");
+  const tabSeason = document.getElementById("tab-season");
+  tabCareer.onclick = () => {
+    tabCareer.classList.add("active"); tabSeason.classList.remove("active");
+    fillCircles(computePlayerAverages(rows));
+    renderGameLog(rows);
+  };
+  tabSeason.onclick = () => {
+    tabSeason.classList.add("active"); tabCareer.classList.remove("active");
+    const yr = document.getElementById("season-year").value;
+    const subset = yearGroups[yr] || [];
+    fillCircles(computePlayerAverages(subset));
+    renderGameLog(subset);
+  };
 
-function detectColumns(header){
-  // heuristics for season/date
-  seasonKey = header.find(h=>/season/i.test(h)) || null;
-  dateKey = header.find(h=>/date/i.test(h)) || null;
-  // numeric columns: everything that parses as a number in most rows (except opponent, team, result, etc.)
-  const exclude = new Set(["Opponent","Opp","Team","TM","Result","R","Location","Notes","Season","Date"]);
-  const sample = rawData.rows.slice(0, Math.min(20, rawData.rows.length));
-  numericCols = header.filter(h => !exclude.has(h)).filter(h=>{
-    let numericCount = 0, checked = 0;
-    for (const r of sample){
-      if (r[h]===undefined || r[h]==="") continue;
-      checked++;
-      if (Number.isFinite(parseFloat(String(r[h]).replace(/[^0-9\.\-]/g,"")))) numericCount++;
-    }
-    return checked>0 && numericCount/checked > 0.6;
+  // Season year dropdown
+  const seasonYear = document.getElementById("season-year");
+  seasonYear.innerHTML = "";
+  years.reverse().forEach(y => {
+    const opt = document.createElement("option");
+    opt.value = y; opt.textContent = y;
+    seasonYear.appendChild(opt);
   });
-}
+  const forced = getSeasonParam();
+  if (forced && years.includes(forced)) seasonYear.value = forced; else if (latest) seasonYear.value = latest;
+  seasonYear.onchange = () => tabSeason.click();
 
-function renderBio(meta){
-  const dest = $("#bioBlock");
-  const items = Object.entries(meta.bio).map(([k,v])=>`<div class="bio-item"><div class="k">${k}</div><div class="v">${v}</div></div>`);
-  dest.innerHTML = items.join("");
-}
+  // Initial view: Career or forced Season via ?season=YYYY
+  const forcedSeason = getSeasonParam();
+  if (forcedSeason && years.includes(forcedSeason)) {
+    tabSeason.classList.add("active"); tabCareer.classList.remove("active");
+    const subset = yearGroups[forcedSeason] || [];
+    fillCircles(computePlayerAverages(subset));
+    renderGameLog(subset);
+  } else {
+    tabCareer.classList.add("active");
+    fillCircles(computePlayerAverages(rows));
+    renderGameLog(rows);
+  }
 
-function seasonsFromRows(){
-  if (!seasonKey){
-    // try to derive from Date, using YYYY or YYYY-YY
-    if (dateKey){
-      const years = Array.from(new Set(rawData.rows.map(r=> String(r[dateKey]).slice(0,4)))).filter(Boolean);
-      return years.sort();
+  // Team filter behavior (filters rows by team column)
+  teamSel.onchange = () => {
+    const val = teamSel.value;
+    const filt = val ? rows.filter(r => (r['team']||'').toLowerCase().includes(val.replace('-', ' '))) : rows;
+    // keep whatever tab is active
+    if (tabSeason.classList.contains("active")) {
+      const yr = seasonYear.value;
+      const yrRows = filt.filter(r => (new Date(r['date'])).getFullYear() == yr);
+      fillCircles(computePlayerAverages(yrRows));
+      renderGameLog(yrRows);
+    } else {
+      fillCircles(computePlayerAverages(filt));
+      renderGameLog(filt);
     }
-    return ["All"];
+  };
+
+  function renderGameLog(rws) {
+    const tbody = document.getElementById("gamelog-body");
+    tbody.innerHTML = "";
+    rws.forEach(r => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${r['date']||''}</td>
+        <td>${r['team']||''}</td>
+        <td>${r['opponent']||''}</td>
+        <td>${r['min']||''}</td>
+        <td>${r['fg']||''}/${r['fga']||''}</td>
+        <td>${r['3p']||''}/${r['3pa']||''}</td>
+        <td>${r['ft']||''}/${r['fta']||''}</td>
+        <td>${r['or']||0}</td>
+        <td>${r['dr']||0}</td>
+        <td>${r['totrb']|| ( (Number(r['or']||0))+ (Number(r['dr']||0)) )}</td>
+        <td>${r['ass']||r['hock ass']||0}</td>
+        <td>${r['st']||0}</td>
+        <td>${r['bs']||0}</td>
+        <td>${r['to']||0}</td>
+        <td>${r['pts']||0}</td>
+      `;
+      tbody.appendChild(tr);
+    });
   }
-  const uniq = Array.from(new Set(rawData.rows.map(r=> r[seasonKey] || "Unknown")));
-  return uniq.filter(Boolean);
 }
 
-function computeCareerAverages(rows){
-  const n = rows.length || 1;
-  const obj = {};
-  for (const c of numericCols){ obj[c] = +(avg(rows, c)).toFixed(1); }
-  return obj;
-}
-function computeCareerTotals(rows){
-  const obj = {};
-  for (const c of numericCols){ obj[c] = +sum(rows, c).toFixed(0); }
-  return obj;
-}
-function computeGameHighs(rows){
-  const obj = {};
-  for (const c of numericCols){ const {max} = maxBy(rows, c); obj[c] = Number.isFinite(max) ? max : "—"; }
-  return obj;
-}
-function seasonRows(selSeason){
-  if (!seasonKey || selSeason==="All") return rawData.rows;
-  return rawData.rows.filter(r => (r[seasonKey]||"") === selSeason);
-}
-
-function renderSummaryCards(obj){
-  const keys = Object.keys(obj).slice(0,8); // first 8 stats
-  $("#averagesSummary").innerHTML = keys.map(k=>`
-    <div class="card">
-      <div class="card-title">${k}</div>
-      <div class="metric">${obj[k]}</div>
-      <div class="sub">${k.includes("%")?"Rate":"Stat"}</div>
-    </div>
-  `).join("");
-}
-
-function renderAveragesView(){
-  // bubbles
-  const activeBubble = $(".bubble.active")?.dataset.bubble || "career";
-  const selSeason = $("#seasonSelect").value;
-  let rows = rawData.rows;
-  if (activeBubble==="season") rows = seasonRows(selSeason);
-
-  let summary = {};
-  if (activeBubble==="career" || activeBubble==="season"){
-    summary = computeCareerAverages(rows);
-    // per-season table (like game logs format but aggregated)
-    const bySeason = seasonKey ? groupBy(rawData.rows, r=>r[seasonKey]) : {"All": rawData.rows};
-    const aggRows = Object.entries(bySeason).map(([season, arr])=>{
-      const o = { Season: season, GP: arr.length };
-      for (const c of numericCols){ o[c] = +(avg(arr,c)).toFixed(1); }
-      return o;
-    }).sort((a,b)=> String(a.Season).localeCompare(String(b.Season)));
-    renderTable("#averagesTable", ["Season","GP", ...numericCols], aggRows);
-  } else if (activeBubble==="totals"){
-    summary = computeCareerTotals(rows);
-    // totals by season
-    const bySeason = seasonKey ? groupBy(rawData.rows, r=>r[seasonKey]) : {"All": rawData.rows};
-    const aggRows = Object.entries(bySeason).map(([season, arr])=>{
-      const o = { Season: season, GP: arr.length };
-      for (const c of numericCols){ o[c] = +sum(arr,c).toFixed(0); }
-      return o;
-    }).sort((a,b)=> String(a.Season).localeCompare(String(b.Season)));
-    renderTable("#averagesTable", ["Season","GP", ...numericCols], aggRows);
-  } else if (activeBubble==="highs"){
-    summary = computeGameHighs(rows);
-    // highs by stat, one row
-    const row = { Category: "Highs" };
-    for (const c of numericCols){ row[c] = summary[c]; }
-    renderTable("#averagesTable", ["Category", ...numericCols], [row]);
-  }
-  renderSummaryCards(summary);
-}
-
-function renderLogsView(){
-  const selSeason = $("#logSeasonSelect").value;
-  const rows = seasonRows(selSeason);
-  // Keep all original columns, but show most relevant first if present
-  const header = rawData.header;
-  renderTable("#logsTable", header, rows);
-}
-
-async function init(){
-  bindThemeToggle();
-  bindTabs();
-  setTabs(currentView);
-
-  const name = getQuery("name") || "Kyle Denzin";
-  currentName = name;
-  $("#playerName").textContent = name;
-  const meta = PLAYERS[name];
-  if (!meta) {
-    $("#playerSub").textContent = "Unknown player";
-    return;
-  }
-  $("#playerSub").textContent = `#${meta.number} • ${meta.pos} • ${meta.team}`;
-  $("#rawLink").href = meta.csv;
-  $("#playerSwitcher").href = "./";
-
-  // Load CSV
-  rawData = await CSV.fetch(meta.csv);
-  detectColumns(rawData.header);
-
-  // Seasons for selects
-  const seasons = seasonsFromRows();
-  const seasonSelect = $("#seasonSelect");
-  const logSeasonSelect = $("#logSeasonSelect");
-  seasonSelect.innerHTML = seasons.map(s=>`<option>${s}</option>`).join("");
-  logSeasonSelect.innerHTML = seasons.map(s=>`<option>${s}</option>`).join("");
-
-  // bubbles behavior
-  $all(".bubble").forEach(b=> b.addEventListener("click", e=>{
-    $all(".bubble").forEach(x=>x.classList.remove("active"));
-    b.classList.add("active");
-    renderAveragesView();
-  }));
-  seasonSelect.addEventListener("change", renderAveragesView);
-
-  renderAveragesView();
-  renderLogsView();
-  logSeasonSelect.addEventListener("change", renderLogsView);
-
-  // Switch to view via query
-  const qView = getQuery("view");
-  if (qView) setTabs(qView);
-}
-
-init();
+window.addEventListener("DOMContentLoaded", init);

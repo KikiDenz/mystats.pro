@@ -1,0 +1,103 @@
+[
+  {
+    "slug": "pretty-good",
+    "name": "Pretty Good Basketball Team",
+    "logo": "assets/pretty-good-logo.png",
+    "colors": {
+      "light": {
+        "primary": "#1f4fbf",
+        "accent": "#9fd0ff",
+        "bg": "#ffffff",
+        "text": "#0f172a"
+      },
+      "dark": {
+        "primary": "#1f4fbf",
+        "accent": "#9fd0ff",
+        "bg": "#000000",
+        "text": "#f8fafc"
+      }
+    },
+    "teamCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7JWJjsx4iZtJtf6PTOR6_adf9pdbtFlglN8aX2_3QynveLtg427bYcD0OzlFpxEoNaMFYwaIFj12T/pub?gid=0&single=true&output=csv",
+    "roster": [
+      "kyle-denzin",
+      "levi-denzin",
+      "findlay-wendtman",
+      "jackson-neaves",
+      "josh-todd",
+      "rhys-ogle",
+      "jarren-owen",
+      "callan-beamish"
+    ]
+  },
+  {
+    "slug": "duncles",
+    "name": "Duncles",
+    "logo": "assets/duncles-logo.png",
+    "colors": {
+      "light": {
+        "primary": "#6b7280",
+        "accent": "#a3a3a3",
+        "bg": "#ffffff",
+        "text": "#0f172a"
+      },
+      "dark": {
+        "primary": "#6b7280",
+        "accent": "#a3a3a3",
+        "bg": "#0b0b0b",
+        "text": "#f8fafc"
+      }
+    },
+    "teamCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7JWJjsx4iZtJtf6PTOR6_adf9pdbtFlglN8aX2_3QynveLtg427bYcD0OzlFpxEoNaMFYwaIFj12T/pub?gid=2055150665&single=true&output=csv",
+    "roster": [
+      "kyle-denzin-0"
+    ]
+  },
+  {
+    "slug": "sweaty-already",
+    "name": "Sweaty Already",
+    "logo": "assets/sweaty-already-logo.png",
+    "colors": {
+      "light": {
+        "primary": "#1f4fbf",
+        "accent": "#ef4444",
+        "bg": "#ffffff",
+        "text": "#0f172a"
+      },
+      "dark": {
+        "primary": "#000000",
+        "accent": "#ef4444",
+        "bg": "#000000",
+        "text": "#f8fafc"
+      }
+    },
+    "teamCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7JWJjsx4iZtJtf6PTOR6_adf9pdbtFlglN8aX2_3QynveLtg427bYcD0OzlFpxEoNaMFYwaIFj12T/pub?gid=972116953&single=true&output=csv",
+    "roster": [
+      "codey-nowland",
+      "kyle-denzin-10"
+    ]
+  },
+  {
+    "slug": "chuckers-chuckers",
+    "name": "Chuckers Chuckers",
+    "logo": "assets/chuckers-logo.png",
+    "colors": {
+      "light": {
+        "primary": "#94a3b8",
+        "accent": "#9fd0ff",
+        "bg": "#ffffff",
+        "text": "#0f172a"
+      },
+      "dark": {
+        "primary": "#374151",
+        "accent": "#9fd0ff",
+        "bg": "#0b0b0b",
+        "text": "#f8fafc"
+      }
+    },
+    "teamCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7JWJjsx4iZtJtf6PTOR6_adf9pdbtFlglN8aX2_3QynveLtg427bYcD0OzlFpxEoNaMFYwaIFj12T/pub?gid=26509490&single=true&output=csv",
+    "roster": [
+      "findlay-wendtman",
+      "jackson-neaves"
+    ]
+  }
+]

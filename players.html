@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Players — mystats.pro</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+  <div class="brand"><a href="index.html" class="badge">mystats.pro</a></div>
+  <div class="actions">
+    <a href="players.html" class="btn">Players</a>
+    <div class="search"><input id="search" placeholder="Search player"/></div>
+    <button id="theme-toggle" class="toggle">Dark mode</button>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="display" style="font-size: clamp(28px, 4vw, 44px);">Players</h1>
+  <div class="hstack" style="gap:10px; margin-top: 8px;">
+    <label>Team</label>
+    <select id="team-filter" class="select"></select>
+    <label>Position</label>
+    <select id="pos-filter" class="select">
+      <option value="">All</option>
+      <option>Guard</option>
+      <option>Forward</option>
+      <option>Center</option>
+    </select>
+  </div>
+
+  <section class="section grid" id="players-grid"></section>
+</main>
+
+<footer class="footer container">© <span id="year"></span> mystats.pro</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script type="module">
+import { initThemeToggle, loadJSON, initSearch } from './js/app.js';
+initThemeToggle(); initSearch();
+
+const grid = document.getElementById('players-grid');
+const teamSel = document.getElementById('team-filter');
+const posSel = document.getElementById('pos-filter');
+const qInput = document.getElementById('search');
+
+const teams = await loadJSON('data/teams.json');
+const players = await loadJSON('data/players.json');
+
+// Fill team filter
+teamSel.innerHTML = '<option value="">All</option>' + teams.map(t => `<option value="${t.slug}">${t.name}</option>`).join('');
+
+function render() {
+  const team = teamSel.value;
+  const pos = posSel.value;
+  const q = (qInput.value || '').toLowerCase().trim();
+  grid.innerHTML = '';
+  players
+    .filter(p => !team || (p.teams||[]).includes(team))
+    .filter(p => !pos || (p.position||'').toLowerCase() === pos.toLowerCase())
+    .filter(p => !q || (p.name||'').toLowerCase().includes(q))
+    .forEach(p => {
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = `player.html?player=${p.slug}`;
+      const teamNames = (p.teams||[]).map(s => (teams.find(t=>t.slug===s)||{}).name || s).join(' · ');
+      a.innerHTML = `
+        <div class="title"><img class="logo" src="${p.image}" alt=""/> ${p.name}</div>
+        <div class="pills">
+          ${p.number ? `<span class="pill">#${p.number}</span>`: ''}
+          ${p.position ? `<span class="pill">${p.position}</span>`: ''}
+          <span class="pill">${teamNames || 'Free Agent'}</span>
+        </div>
+      `;
+      grid.appendChild(a);
+    });
+}
+
+teamSel.onchange = render;
+posSel.onchange = render;
+qInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') render(); });
+
+render();
+</script>
+</body>
+</html>

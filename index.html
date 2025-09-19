@@ -2,49 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>mystats.pro — Team</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>mystats.pro — Teams</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
-<body class="theme-light">
-  <header class="site-header">
-    <div class="site-title">mystats<span class="dot">.</span>pro</div>
-    <div class="header-actions">
-      <select id="teamSelect" class="select">
-        <option value="sweatyAlready">Sweaty Already</option>
-        <option value="prettyGood">Pretty Good</option>
-        <option value="duncles">Duncles</option>
-      </select>
-      <button id="themeToggle" class="btn">Dark</button>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="badge">mystats.pro</div>
+    </div>
+    <div class="actions">
+      <a href="players.html" class="btn">Players</a>
+      <div class="search"><input id="search" placeholder="Search team or player"/></div>
+      <button id="theme-toggle" class="toggle">Dark mode</button>
     </div>
   </header>
-
   <main class="container">
-    <section class="cards two">
-      <div class="card" id="teamRecord">
-        <div class="card-title">Record</div>
-        <div class="metric" id="recordValue">–</div>
-        <div class="sub">W – L</div>
+    <section class="hero">
+      <div class="hero-left">
+        <h1 class="display">Your Season. Your Numbers.</h1>
+        <div class="subtle">Live game logs, career vs season splits, and team results — all in one place.</div>
+        <div class="cta">
+          <a href="#teams-grid" class="btn primary">Browse Teams</a>
+          <a href="player.html?player=kyle-denzin" class="btn">View a Player</a>
+        </div>
       </div>
-      <div class="card">
-        <div class="card-title">Roster</div>
-        <div id="rosterList" class="roster"></div>
-      </div>
+      <div class="hero-tiles" id="hero-tiles"></div>
     </section>
-
-    <section class="card">
-      <div class="card-title">Recent Games</div>
-      <div id="gamesTable" class="table-wrap"></div>
-    </section>
+    <h1 id="teams-grid" style="margin-top:22px;">Teams</h1>
+    <h1>Teams</h1>
+    <div id="teams" class="grid"></div>
   </main>
+  <footer class="footer container">
+    © <span id="year"></span> mystats.pro
+  </footer>
+  <script type="module">
+    import { initThemeToggle, loadJSON, initSearch } from './js/app.js';
+    initThemeToggle(); initSearch();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const grid = document.getElementById('teams');
+    (async () => {
+      const teams = await loadJSON('data/teams.json');
+      const players = await loadJSON('data/players.json');
+      
+      // Hero tiles (4 teams)
+      const tiles = document.getElementById('hero-tiles');
+      teams.slice(0,4).forEach(t => {
+        const card = document.createElement('a');
+        card.className = 'hero-tile';
+        card.href = `team.html?team=${t.slug}`;
+        const mode = localStorage.getItem('theme') || 'light';
+        const colors = t.colors?.[mode] || t.colors?.light || {};
+        const p = colors.primary || '#3b82f6';
+        const a = colors.accent || '#60a5fa';
+        card.style.background = `linear-gradient(135deg, ${p}, ${a})`;
+        card.innerHTML = `<img class="tile-logo" src="${t.logo}" alt="logo"/><div class="tile-title">${t.name}</div>`;
+        tiles.appendChild(card);
+      });
 
-  <footer class="footer">Built with ❤️ for local hoops • <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub Pages</a></footer>
-
-  <!-- <script src="./js/util.js"></script> -->
-  <script src="./js/team.js"></script>
-  <script type="module" src="./js/team.js"></script>
+      for (const t of teams) {
+        const card = document.createElement('a');
+        card.className = 'card';
+        card.href = `team.html?team=${t.slug}`;
+        const roster = t.roster.map(slug => {
+          const p = players.find(x => x.slug === slug);
+          return p ? p.name : slug;
+        }).slice(0,4).join(' · ') + (t.roster.length>4? ' …':'');
+        card.innerHTML = `
+          <div class="title"><img class="logo" src="${t.logo}" alt="logo"/> ${t.name}</div>
+          <div class="pills">
+            <span class="pill" style="border-color: var(--primary)">Team</span>
+            <span class="pill">Roster</span>
+          </div>
+          <div class="section">
+            <div class="vstack">
+              <div style="font-size:14px; color:var(--muted)">Top players</div>
+              <div>${roster}</div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      }
+    })();
+  </script>
 </body>
 </html>
