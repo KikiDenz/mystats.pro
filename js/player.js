@@ -118,6 +118,18 @@ async function init() {
     }
   };
 
+  // function currentRows(allRows, teamSel, tabSeason, seasonYear) {
+  //   let out = allRows.slice();
+  //   const t = teamSel.value;
+  //   if (t) out = out.filter(r => (r.team || '').toLowerCase().includes(t.replace('-', ' ')));
+  //   if (tabSeason.classList.contains("active")) {
+  //     const yr = seasonYear.value;
+  //     out = out.filter(r => (new Date(r.date)).getFullYear() == yr);
+  //   }
+  //   return out;
+  // }
+
+
   function renderGameLog(rws) {
     const tbody = document.getElementById("gamelog-body");
     tbody.innerHTML = "";

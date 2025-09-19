@@ -63,8 +63,10 @@ async function init() {
     if (!p) return;
     const a = document.createElement("a");
     a.href = `player.html?player=${p.slug}`;
-    a.className = "pill";
-    a.textContent = `${p.name}${p.number ? " #" + p.number : ""}`;
+    a.className = "player-tile";
+    a.innerHTML = `<img src="${p.image}" alt="contain"/>
+                  <div><div class="nm">${p.name}</div>
+                  <div class="num">#${p.number||''}</div></div>`;
     rosterEl.appendChild(a);
   });
 

@@ -22,6 +22,8 @@
   --radius: 18px;
 }
 
+:root.dark .tab { color: #e5e7eb; } /* dark inactive pills readable */
+
 * { box-sizing: border-box; }
 html, body {
   margin: 0; padding: 0;
@@ -194,6 +196,33 @@ h3 { margin: 8px 0 10px; }
 .banner .logo { width: auto; height: 56px; border: none; }
 .banner .title { font-size: clamp(22px, 3vw, 32px); font-weight: 900; }
 
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.player-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-tile img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.player-tile .nm { font-weight: 800; }
+.player-tile .num { font-size: 12px; color: var(--muted); }
 
 .toast {
   margin-top: 10px;

@@ -25,14 +25,30 @@
         <div class="subtle">Live game logs, career vs season splits, and team results — all in one place.</div>
         <div class="cta">
           <a href="#teams-grid" class="btn primary">Browse Teams</a>
-          <a href="player.html?player=kyle-denzin" class="btn">View a Player</a>
+          <a href="players.html" class="btn">View a Player</a>
+
         </div>
       </div>
       <div class="hero-tiles" id="hero-tiles"></div>
     </section>
-    <h1 id="teams-grid" style="margin-top:22px;">Teams</h1>
     <h1>Teams</h1>
     <div id="teams" class="grid"></div>
+    </section>
+    <h1>Players</h1>
+<section class="players-grid" id="home-players"></section>
+<script type="module">
+  const players = await loadJSON('data/players.json');
+  const hp = document.getElementById('home-players');
+  players.slice(0,8).forEach(p=>{
+    const a=document.createElement('a');
+    a.className='player-tile';
+    a.href=`player.html?player=${p.slug}`;
+    a.innerHTML=`<img src="${p.image}" alt=""/><div><div class="nm">${p.name}</div></div>`;
+    hp.appendChild(a);
+  });
+  // </section>
+</script>
+
   </main>
   <footer class="footer container">
     © <span id="year"></span> mystats.pro
