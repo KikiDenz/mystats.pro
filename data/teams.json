@@ -12,9 +12,9 @@
       },
       "dark": {
         "primary": "#1f4fbf",
-        "accent": "#9fd0ff",
-        "bg": "#000000",
-        "text": "#f8fafc"
+        "accent": "#2b2b2b",
+        "bg": "#2b2b2b",
+        "text": "#ffffff"
       }
     },
     "teamCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7JWJjsx4iZtJtf6PTOR6_adf9pdbtFlglN8aX2_3QynveLtg427bYcD0OzlFpxEoNaMFYwaIFj12T/pub?gid=0&single=true&output=csv",

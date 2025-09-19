@@ -4,14 +4,14 @@
   --text: #0f172a;
   --muted: #6b7280;
   --primary: #3b82f6;
-  --accent: #60a5fa;
+  --accent: #2c8bff;
   --border: #e5e7eb;
   --shadow: 0 10px 20px rgba(2,6,23,0.06), 0 2px 6px rgba(2,6,23,0.06);
   --radius: 16px;
 }
 
 :root.dark {
-  --bg: #0a0a0a;
+  --bg: #2b2b2b;
   --surface: #111214;
   --text: #f3f4f6;
   --muted: #a1a1aa;
@@ -32,7 +32,7 @@ html, body {
 a { color: inherit; text-decoration: none; }
 img { display: block; }
 
-.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.container { max-width: max-content; margin: 0 auto; padding: 20px; }
 
 .header {
   display:flex; align-items:center; justify-content: space-between;
@@ -76,7 +76,7 @@ h3 { margin: 8px 0 10px; }
   box-shadow: var(--shadow);
 }
 .card .title { font-weight: 800; display:flex; align-items:center; gap: 10px; letter-spacing: .2px;}
-.logo { width: 40px; height: 40px; object-fit: cover; border-radius: 10px; border:1px solid var(--border); background: white; }
+.logo { width: auto; height: 40px; object-fit: cover; border-radius: 10px; border:1px solid var(--border); background: white; }
 
 .pills { display:flex; gap: 8px; flex-wrap: wrap; }
 .pill {
@@ -124,7 +124,7 @@ h3 { margin: 8px 0 10px; }
 .badge-loss { background: #ef4444; }
 
 .player-hero { display:flex; gap: 16px; align-items: center; }
-.player-hero img { width: 110px; height: 110px; border-radius: 18px; border:1px solid var(--border); object-fit: cover; box-shadow: var(--shadow); }
+.player-hero img { width: auto; height: 150px; border-radius: 18px; border:1px solid var(--border); object-fit: cover; box-shadow: var(--shadow); }
 
 .tabs { display:flex; gap: 8px; }
 .tab { padding: 10px 12px; border-radius: 12px; border:1px solid var(--border); background: var(--surface); cursor:pointer; font-weight:700; }
@@ -179,7 +179,7 @@ h3 { margin: 8px 0 10px; }
   box-shadow: var(--shadow);
 }
 .hero-tile .tile-title { font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.35); }
-.hero-tile .tile-logo { position:absolute; top:10px; right:10px; width:44px; height:44px; border-radius:10px; border:1px solid rgba(255,255,255,.5); background:#fff; }
+.hero-tile .tile-logo { position:absolute; top:10px; right:10px; width:auto; height:44px; border-radius:10px; border:1px solid rgba(255,255,255,.5); background:#fff; }
 .banner {
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -191,7 +191,7 @@ h3 { margin: 8px 0 10px; }
   display:flex; align-items:center; gap: 14px; padding: 16px;
   color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.35);
 }
-.banner .logo { width: 56px; height: 56px; border: none; }
+.banner .logo { width: auto; height: 56px; border: none; }
 .banner .title { font-size: clamp(22px, 3vw, 32px); font-weight: 900; }
 
 
