@@ -11,13 +11,11 @@ function getParam(name) {
   const url = new URL(window.location.href);
   return url.searchParams.get(name);
 }
+
 function getSeasonParam() {
   const url = new URL(window.location.href);
   const s = url.searchParams.get('season');
   return s && /^\d{4}$/.test(s) ? s : null;
-}
-  const url = new URL(window.location.href);
-  return url.searchParams.get(name);
 }
 
 function fillCircles(stats){
