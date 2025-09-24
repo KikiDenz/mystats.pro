@@ -309,8 +309,7 @@ def main():
         return TEAM_TAB.get(team_slug, fallback_name)
 
     PLAYER_HEADERS_LEGACY = [
-        "date","position","team","opponent","min","fg","fga","fg%","3p","3pa","3p%","ft","fta","ft%","or","dr","totrb",
-        "hock ass","ass","pf","st","bs","to","pts"
+        "date","position","team","opponent","min","fg","fga","fg%","3p","3pa","3p%","ft","fta","ft%","or","dr","totrb","ass","pf","st","bs","to","pts"
     ]
 
     for r in out_rows:
@@ -344,7 +343,6 @@ def main():
             r["or"],
             r["dr"],
             r["totrb"],
-            0,              # "hock ass" placeholder
             r["ass"],
             r["pf"],
             r["st"],
