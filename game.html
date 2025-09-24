@@ -1,30 +1,23 @@
-<!DOCTYPE html>
+<!-- game.html -->
+<!doctype html>
 <html lang="en">
-    <!-- game.html -->
-<header class="header">
-  <a href="index.html" class="badge">mystats.pro</a>
+  <head>
+    <meta charset="utf-8" />
+    <title>Game Box Score</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a href="index.html" class="badge">mystats.pro</a>
+    </header>
 
-  <div class="spacer"></div>
+    <main class="container vstack">
+      <div id="game-header" class="banner"></div>
+      <div id="box-table" class="section"></div>
+    </main>
 
-  <!-- optional: reuse your global search if you want -->
-  <!-- <input type="search" class="search" placeholder="Search team or player"> -->
-
-  <button id="theme-toggle" class="btn btn-ghost small">Dark mode</button>
-</header>
-
-<head>
-  <meta charset="UTF-8">
-  <title>Game Box Score</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<header class="header">
-  <a href="index.html" class="badge">mystats.pro</a>
-</header>
-<main class="container vstack">
-  <div id="game-header" class="banner"></div>
-  <div id="box-table" class="section"></div>
-</main>
-<script type="module" src="js/game.js"></script>
-</body>
+    <!-- keep type="module" or plain script; this file has no imports -->
+    <script type="module" src="js/game.js"></script>
+  </body>
 </html>
+
