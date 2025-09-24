@@ -98,6 +98,20 @@ async function init() {
       <td>${r['season'] || ''}</td>
     `;
     tbody.appendChild(tr);
+
+    const slugify = s => (s||"")
+      .toLowerCase()
+      .replaceAll("&","and")
+      .replace(/\s+/g,"-")
+      .trim();
+
+    const gameId = `${r.date}_${slugify(r.team1)}_vs_${slugify(r.team2)}`;
+    tr.style.cursor = "pointer";
+    tr.addEventListener("click", () => {
+      window.location.href = `game.html?game_id=${encodeURIComponent(gameId)}`;
+    });
+
+
   });
 }
 
