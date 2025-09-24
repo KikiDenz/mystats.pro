@@ -68,6 +68,7 @@ const fmt = (v)=> (v === undefined || v === null || v === '' ? '—' : v);
     ['pf','PF'], ['pts','PTS'],
   ];
 
+
   const table = document.createElement('table');
   table.className = 'table';
   const thead = document.createElement('thead');
