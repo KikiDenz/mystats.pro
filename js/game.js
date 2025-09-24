@@ -8,7 +8,7 @@ initTheme();  // ensures body class + toggle text sync across pages
 
 
 // Published CSV for the *Index* tab (not the whole spreadsheet)
-const INDEX_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGdu88uH_BwBwrBtCZdnVGR1CNDWiazKjW_slOjBAvOMH7kOqJxNtWiNY1l3PIfLZhOyaPH43bZyb2/pub?output=csv";
+const INDEX_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGdu88uH_BwBwrBtCZdnVGR1CNDWiazKjW_slOjBAvOMH7kOqJxNtWiNY1l3PIfLZhOyaPH43bZyb2/pub?gid=0&single=true&output=csv";
 
 async function init() {
   if (!gameId) {
