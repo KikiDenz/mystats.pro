@@ -136,11 +136,10 @@ function renderTable(headEl, bodyEl, players) {
     bodyEl.appendChild(tr);
   });
 
-  // (Optional) team totals row; uncomment if you want a totals line.
-  // renderTotalsRow(bodyEl, players, cols);
+//TEAM TOTALS
+  renderTotalsRow(bodyEl, players, cols);
 }
 
-/* Optional totals:
 function renderTotalsRow(bodyEl, players, cols) {
   const sum = (k) => players.reduce((a, p) => a + toNum(p[k]), 0);
   const fg = sum("fg"), fga = sum("fga");
@@ -163,6 +162,6 @@ function renderTotalsRow(bodyEl, players, cols) {
   tr.innerHTML = cols.map(([key]) => `<td>${fmt(totals[key])}</td>`).join("");
   bodyEl.appendChild(tr);
 }
-*/
+
 
 init();
