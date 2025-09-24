@@ -1,82 +1,115 @@
-// js/game.js  — stand-alone, no imports
+// js/game.js
+import { fetchCsv, initTheme } from './app.js';  // fetchCsv returns array of objects by header
 
-// 1) Published CSV for the Index tab (gid=0)
+// --- CONFIG: published CSV for the *Index* tab (not the whole spreadsheet) ---
 const INDEX_CSV =
   "https://docs.google.com/spreadsheets/d/15zxpQZJamQfEz07qFtZAI_738cI2rjc2qrrz-q-8Bo0/export?format=csv&gid=0";
 
-// 2) Helpers
-function fmt(v) {
-  return v === undefined || v === null || v === "" ? "—" : v;
-}
+// --- helpers ---
+const qs = new URLSearchParams(location.search);
+const gameId = qs.get("game_id");
 
-async function fetchCsvRows(url) {
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to fetch CSV: ${res.status}`);
-  const text = await res.text();
-  // Simple CSV split (works for our data that has no quoted commas)
-  return text
-    .trim()
-    .split(/\r?\n/)
-    .map(line => line.split(",").map(s => s.trim()));
-}
+const $ = (id) => document.getElementById(id);
+const fmt = (v) => (v === undefined || v === null || v === "" ? "—" : v);
+const toNum = (v) => {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+};
 
-function rowsToObjects(rows, headerRowIndex = 0) {
-  const headers = rows[headerRowIndex].map(h => h.trim().toLowerCase());
-  const out = [];
-  for (let i = headerRowIndex + 1; i < rows.length; i++) {
-    const row = rows[i] || [];
-    if (row.every(c => !c)) continue; // skip blank lines
-    const obj = {};
-    headers.forEach((h, idx) => (obj[h] = (row[idx] ?? "").trim()));
-    out.push(obj);
-  }
-  return out;
-}
+initTheme(); // keep light/dark mode consistent
 
-function ensureSkeleton() {
-  // Must exist in game.html:
-  // <div id="game-header" class="banner"></div>
-  // <div id="box-table" class="section"></div>
-  const box = document.getElementById("box-table");
-  if (!box) {
-    const msg = document.createElement("div");
-    msg.textContent = "#box-table container not found in HTML";
-    document.body.appendChild(msg);
-    return null;
+async function init() {
+  if (!gameId) {
+    $("game-header").textContent = "No game_id given";
+    return;
   }
-  // Build a table if not present
-  if (!box.querySelector("table")) {
-    const table = document.createElement("table");
-    table.className = "table";
-    table.innerHTML = `
-      <thead id="box-table-head"></thead>
-      <tbody id="box-table-body"></tbody>
-    `;
-    box.appendChild(table);
+
+  // 1) Look up the game in the Index tab
+  let indexRows = [];
+  try {
+    indexRows = await fetchCsv(INDEX_CSV); // array of objects with headers from Index
+  } catch (e) {
+    $("game-header").textContent = "Failed to load index CSV.";
+    console.error(e);
+    return;
   }
-  return {
-    head: box.querySelector("#box-table-head"),
-    body: box.querySelector("#box-table-body"),
-  };
+
+  const entry = indexRows.find((r) => (r["game_id"] || "").trim() === gameId);
+  if (!entry) {
+    $("game-header").textContent = `Game not found: ${gameId}`;
+    return;
+  }
+
+  // 2) Fetch the game’s own CSV (per-tab csv_url from Index)
+  const gameCsvUrl = entry["csv_url"];
+  if (!gameCsvUrl) {
+    $("game-header").textContent = "Index entry missing csv_url.";
+    return;
+  }
+
+  let gameRows = [];
+  try {
+    gameRows = await fetchCsv(gameCsvUrl);
+  } catch (e) {
+    $("game-header").textContent = "Failed to load game CSV.";
+    console.error(e);
+    return;
+  }
+
+  // 3) Render header from index entry (scores + date + teams)
+  renderHeader(entry);
+
+  // 4) Convert rows to player objects (skip rows without a player name/slug)
+  const players = gameRows
+    .filter((r) => (r.player_name || r.player_slug || "").trim() !== "")
+    .map((r) => ({
+      player_name: r.player_name || r.player_slug || "",
+      min: r.min || "",
+      fg: toNum(r.fg),
+      fga: toNum(r.fga),
+      "3p": toNum(r["3p"]),
+      "3pa": toNum(r["3pa"]),
+      ft: toNum(r.ft),
+      fta: toNum(r.fta),
+      or: toNum(r.or),
+      dr: toNum(r.dr),
+      totrb: toNum(r.totrb),
+      ass: toNum(r.ass),
+      st: toNum(r.st),
+      bs: toNum(r.bs),
+      to: toNum(r.to),
+      pf: toNum(r.pf),
+      pts: toNum(r.pts),
+    }));
+
+  // 5) Render table with FG% / 3P% / FT%
+  renderTable($("box-head"), $("box-body"), players);
 }
 
 function renderHeader(entry) {
-  const el = document.getElementById("game-header");
-  if (!el) return;
-  el.innerHTML = `
-    <div class="title">${fmt(entry.team1_slug)} vs ${fmt(entry.team2_slug)}</div>
-    <div class="pill">Date: ${fmt(entry.date)}</div>
-    <div class="pill">Score: ${fmt(entry.score_team1)} – ${fmt(entry.score_team2)}</div>
+  const t1 = (entry.team1_slug || "").trim();
+  const t2 = (entry.team2_slug || "").trim();
+  const d  = (entry.date || "").trim();
+  const s1 = entry.score_team1 || "";
+  const s2 = entry.score_team2 || "";
+
+  $("game-header").innerHTML = `
+    <div class="title">${t1} <span class="muted">vs</span> ${t2}</div>
+    <div class="pill">Date: ${fmt(d)}</div>
+    <div class="pill">Score: ${fmt(s1)} – ${fmt(s2)}</div>
   `;
 }
 
 function renderTable(headEl, bodyEl, players) {
+  // We add FG%, 3P%, FT% columns right after their makes/attempts
   const cols = [
     ["player_name", "PLAYER"],
     ["min", "MIN"],
-    ["fg", "FG"], ["fga", "FGA"],
-    ["3p", "3P"], ["3pa", "3PA"],
-    ["ft", "FT"], ["fta", "FTA"],
+
+    ["fg", "FG"], ["fga", "FGA"], ["fg_pct", "FG%"],
+    ["3p", "3P"], ["3pa", "3PA"], ["3p_pct", "3P%"],
+    ["ft", "FT"], ["fta", "FTA"], ["ft_pct", "FT%"],
+
     ["or", "OR"], ["dr", "DR"], ["totrb", "TRB"],
     ["ass", "AST"], ["st", "STL"], ["bs", "BLK"], ["to", "TOV"],
     ["pf", "PF"], ["pts", "PTS"],
@@ -85,64 +118,51 @@ function renderTable(headEl, bodyEl, players) {
   headEl.innerHTML = `<tr>${cols.map(([, label]) => `<th>${label}</th>`).join("")}</tr>`;
   bodyEl.innerHTML = "";
 
-  players.forEach(p => {
+  players.forEach((p) => {
+    // Calculate percentages
+    const fgPct = p.fga > 0 ? ((p.fg / p.fga) * 100).toFixed(1) : "";
+    const tpPct = p["3pa"] > 0 ? ((p["3p"] / p["3pa"]) * 100).toFixed(1) : "";
+    const ftPct = p.fta > 0 ? ((p.ft / p.fta) * 100).toFixed(1) : "";
+
+    const row = {
+      ...p,
+      fg_pct: fgPct,
+      "3p_pct": tpPct,
+      ft_pct: ftPct,
+    };
+
     const tr = document.createElement("tr");
-    tr.innerHTML = cols.map(([key]) => `<td>${fmt(p[key])}</td>`).join("");
+    tr.innerHTML = cols.map(([key]) => `<td>${fmt(row[key])}</td>`).join("");
     bodyEl.appendChild(tr);
   });
+
+  // (Optional) team totals row; uncomment if you want a totals line.
+  // renderTotalsRow(bodyEl, players, cols);
 }
 
-async function init() {
-  try {
-    const qs = new URLSearchParams(location.search);
-    const gameId = qs.get("game_id");
+/* Optional totals:
+function renderTotalsRow(bodyEl, players, cols) {
+  const sum = (k) => players.reduce((a, p) => a + toNum(p[k]), 0);
+  const fg = sum("fg"), fga = sum("fga");
+  const tp = sum("3p"), tpa = sum("3pa");
+  const ft = sum("ft"), fta = sum("fta");
 
-    const headerBox = document.getElementById("game-header");
-    if (!gameId) {
-      if (headerBox) headerBox.textContent = "No game_id given";
-      return;
-    }
+  const totals = {
+    player_name: "TEAM TOTALS",
+    min: "",
+    fg, fga, fg_pct: fga ? ((fg / fga) * 100).toFixed(1) : "",
+    "3p": tp, "3pa": tpa, "3p_pct": tpa ? ((tp / tpa) * 100).toFixed(1) : "",
+    ft, fta, ft_pct: fta ? ((ft / fta) * 100).toFixed(1) : "",
+    or: sum("or"), dr: sum("dr"), totrb: sum("totrb"),
+    ass: sum("ass"), st: sum("st"), bs: sum("bs"), to: sum("to"),
+    pf: sum("pf"), pts: sum("pts"),
+  };
 
-    const tableRefs = ensureSkeleton();
-    if (!tableRefs) return;
-
-    // 1) Load the index
-    const indexRows = await fetchCsvRows(INDEX_CSV);
-    const indexObjs = rowsToObjects(indexRows, 0); // first row is headers
-    const entry = indexObjs.find(r => (r.game_id || "").trim() === gameId);
-
-    if (!entry) {
-      if (headerBox) headerBox.textContent = `Game not found: ${gameId}`;
-      return;
-    }
-
-    renderHeader(entry);
-
-    // 2) Load the specific game CSV via the URL in the index
-    const gameCsvUrl =
-      entry.csv_url || entry.csv || entry.url || entry.link; // tolerate different header names
-
-    if (!gameCsvUrl) {
-      if (headerBox) headerBox.textContent = "No csv_url for this game in Index sheet.";
-      return;
-    }
-
-    const raw = await fetchCsvRows(gameCsvUrl);
-
-    // detect META on first row; then headers are on the second row
-    let headerRowIndex = 0;
-    if (raw.length && (raw[0][0] || "").toUpperCase() === "META") {
-      headerRowIndex = 1;
-    }
-
-    const players = rowsToObjects(raw, headerRowIndex);
-
-    renderTable(tableRefs.head, tableRefs.body, players);
-  } catch (err) {
-    console.error(err);
-    const headerBox = document.getElementById("game-header");
-    if (headerBox) headerBox.textContent = `Error: ${err.message}`;
-  }
+  const tr = document.createElement("tr");
+  tr.className = "totals";
+  tr.innerHTML = cols.map(([key]) => `<td>${fmt(totals[key])}</td>`).join("");
+  bodyEl.appendChild(tr);
 }
+*/
 
-document.addEventListener("DOMContentLoaded", init);
+init();
