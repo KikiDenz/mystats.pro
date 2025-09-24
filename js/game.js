@@ -82,6 +82,41 @@ async function init() {
     <div class="pill">Score: ${entry.score_team1} – ${entry.score_team2}</div>
   `;
 
+  // --- build box score table from per-game CSV ---
+  // rows shaped like: {date, player_slug, player_name, team_slug, opponent_slug, min, fg, fga, 3p, 3pa, ft, fta, or, dr, totrb, ass, pf, st, bs, to, pts}
+
+  const cols = [
+    ['player_name','Player'],
+    ['min','MIN'],
+    ['fg','FG'], ['fga','FGA'],
+    ['3p','3P'], ['3pa','3PA'],
+    ['ft','FT'], ['fta','FTA'],
+    ['or','OR'], ['dr','DR'], ['totrb','TRB'],
+    ['ass','AST'], ['st','STL'], ['bs','BLK'], ['to','TOV'], ['pf','PF'],
+    ['pts','PTS']
+  ];
+
+  // keep only real player lines (skip META row etc.)
+  const players = gameRows.filter(r => (r.player_slug || r.player_name) && !(r.META));
+
+  // sort by points (optional)
+  players.sort((a,b) => (+b.pts || 0) - (+a.pts || 0));
+
+  const thead = `<thead><tr>${cols.map(([_,label]) => `<th>${label}</th>`).join('')}</tr></thead>`;
+  const tbody = `<tbody>${
+    players.map(r => `<tr>${cols.map(([k]) => `<td>${r[k] ?? ''}</td>`).join('')}</tr>`).join('')
+  }</tbody>`;
+
+  document.getElementById('box-table').innerHTML = `
+    <div class="card">
+      <table class="table">
+        ${thead}
+        ${tbody}
+      </table>
+    </div>
+  `;
+
+
   // Render a very simple table for now (you can keep your richer renderer below)
   const table = document.getElementById('box-table');
   if (!table) return;
