@@ -1,90 +1,62 @@
-import { fetchCsv } from './app.js';
+// js/game.js
+import { fetchCsv, initThemeToggle } from './app.js';
+
+// theme toggle to keep dark/light consistent
+initThemeToggle();
 
 const qs = new URLSearchParams(location.search);
-const gameId = (qs.get('game_id') || '').trim();
-const debug = qs.get('debug') === '1';
+const gameId = qs.get('game_id');
 
-function show(msg) {
-  if (!debug) return;
-  const host = document.getElementById('game-header') || document.body;
-  host.insertAdjacentHTML('beforeend', `<div style="
-      margin:.5rem 0;padding:.5rem .75rem;border:1px dashed #bbb;
-      font:12px/1.35 ui-monospace,monospace;background:rgba(0,0,0,.03)
-    ">${msg}</div>`);
-  console.log('[game]', msg);
-}
-
-function errorOut(msg) {
-  const h = document.getElementById('game-header');
-  if (h) h.textContent = msg;
-  show('ERROR: ' + msg);
-}
-
-// 👉 PASTE YOUR *Index tab* published CSV here (export?format=csv&gid=<index_gid>)
+// 🔗 PUBLISHED *Index* tab (File ▸ Share ▸ Publish to web → Link → CSV)
+// Make sure this URL points to the Index tab's gid.
 const INDEX_CSV =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vSGdu88uH_BwBwrBtCZdnVGR1CNDWiazKjW_slOjBAvOMH7kOqJxNtWiNY1l3PIfLZhOyaPH43bZyb2/pub?gid=0&single=true&output=csv';
 
-async function init() {
+const headerEl = document.getElementById('game-header');
+const tableEl  = document.getElementById('box-table');
+
+function htm(str){const d=document.createElement('div');d.innerHTML=str.trim();return d.firstElementChild;}
+const fmt = (v)=> (v === undefined || v === null || v === '' ? '—' : v);
+
+(async function init() {
   if (!gameId) {
-    errorOut('No game_id given');
-    return;
-  }
-  show('game_id: ' + gameId);
-  show('INDEX_CSV: ' + INDEX_CSV);
-
-  // 1) Load Index
-  let indexRows;
-  try {
-    indexRows = await fetchCsv(INDEX_CSV);
-    show('Loaded index rows: ' + indexRows.length);
-    if (!indexRows.length) {
-      errorOut('Index CSV returned no rows. Is the link the Index tab CSV?');
-      return;
-    }
-  } catch (e) {
-    errorOut('Failed to fetch Index CSV: ' + e);
+    headerEl.textContent = 'No game_id given';
     return;
   }
 
-  // 2) Find matching game row
+  // 1) read the Index, find our game
+  const indexRows = await fetchCsv(INDEX_CSV);            // [{game_id,date,team1_slug,...,csv_url}]
   const entry = indexRows.find(r => (r.game_id || '').trim() === gameId);
   if (!entry) {
-    errorOut('Game not found in Index: ' + gameId);
-    return;
-  }
-  const gameCsvUrl = (entry.csv_url || '').trim();
-  if (!gameCsvUrl) {
-    errorOut('csv_url empty for ' + gameId);
-    return;
-  }
-  show('gameCsvUrl: ' + gameCsvUrl);
-
-  // 3) Fetch the per-game CSV
-  let gameRows;
-  try {
-    // Add tiny cachebuster
-    const url = gameCsvUrl + (gameCsvUrl.includes('?') ? '&' : '?') + 'cb=' + Date.now();
-    gameRows = await fetchCsv(url);
-    show('Loaded game rows: ' + gameRows.length);
-  } catch (e) {
-    errorOut('Failed to fetch game CSV: ' + e);
+    headerEl.textContent = `Game not found: ${gameId}`;
     return;
   }
 
-  // First row is META (from the Python script)
-  const meta = gameRows.find(r => (r.date || r.META || '').toString().toUpperCase() === 'META')
-           || gameRows[0];
+  // 2) read the per-game CSV
+  const gameRows = await fetchCsv(entry.csv_url);
 
-  // Render header
-  document.getElementById('game-header').innerHTML = `
-    <div class="title">${entry.team1_slug} vs ${entry.team2_slug}</div>
-    <div class="pill">Date: ${entry.date}</div>
-    <div class="pill">Score: ${entry.score_team1} – ${entry.score_team2}</div>
-  `;
+  // By our Python writer:
+  // row0 => META, row1 => headers, row2+ => players
+  const metaRow   = gameRows[0] || {};
+  const headers   = Object.keys(gameRows[1] || {}); // not used, but helpful if you later want dynamic columns
+  const players   = gameRows.slice(2);              // actual player lines
 
-  // --- build box score table from per-game CSV ---
-  // rows shaped like: {date, player_slug, player_name, team_slug, opponent_slug, min, fg, fga, 3p, 3pa, ft, fta, or, dr, totrb, ass, pf, st, bs, to, pts}
+  // 3) header
+  const t1 = entry.team1_slug, t2 = entry.team2_slug;
+  const date = entry.date;
+  const s1 = entry.score_team1, s2 = entry.score_team2;
 
+  headerEl.innerHTML = '';
+  headerEl.appendChild(htm(`
+    <div class="title">${t1} <span class="muted">vs</span> ${t2}</div>
+    <div class="pills">
+      <span class="pill">Date: ${fmt(date)}</span>
+      <span class="pill">Score: ${fmt(s1)} – ${fmt(s2)}</span>
+    </div>
+  `));
+
+  // 4) table
+  // choose a friendly set/order of columns for display
   const cols = [
     ['player_name','Player'],
     ['min','MIN'],
@@ -92,44 +64,24 @@ async function init() {
     ['3p','3P'], ['3pa','3PA'],
     ['ft','FT'], ['fta','FTA'],
     ['or','OR'], ['dr','DR'], ['totrb','TRB'],
-    ['ass','AST'], ['st','STL'], ['bs','BLK'], ['to','TOV'], ['pf','PF'],
-    ['pts','PTS']
+    ['ass','AST'], ['st','STL'], ['bs','BLK'], ['to','TOV'],
+    ['pf','PF'], ['pts','PTS'],
   ];
 
-  // keep only real player lines (skip META row etc.)
-  const players = gameRows.filter(r => (r.player_slug || r.player_name) && !(r.META));
+  const table = document.createElement('table');
+  table.className = 'table';
+  const thead = document.createElement('thead');
+  thead.innerHTML = `<tr>${cols.map(([,label]) => `<th>${label}</th>`).join('')}</tr>`;
+  table.appendChild(thead);
 
-  // sort by points (optional)
-  players.sort((a,b) => (+b.pts || 0) - (+a.pts || 0));
+  const tbody = document.createElement('tbody');
+  players.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = cols.map(([k]) => `<td>${fmt(p[k])}</td>`).join('');
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
 
-  const thead = `<thead><tr>${cols.map(([_,label]) => `<th>${label}</th>`).join('')}</tr></thead>`;
-  const tbody = `<tbody>${
-    players.map(r => `<tr>${cols.map(([k]) => `<td>${r[k] ?? ''}</td>`).join('')}</tr>`).join('')
-  }</tbody>`;
-
-  document.getElementById('box-table').innerHTML = `
-    <div class="card">
-      <table class="table">
-        ${thead}
-        ${tbody}
-      </table>
-    </div>
-  `;
-
-
-  // Render a very simple table for now (you can keep your richer renderer below)
-  const table = document.getElementById('box-table');
-  if (!table) return;
-  if (!meta) { table.textContent = 'No META/rows in game CSV.'; return; }
-
-  const head = Object.keys(gameRows[1] || {}).filter(k => k && k !== 'META'); // skip meta
-  const thead = `<thead><tr>${head.map(h => `<th>${h.toUpperCase()}</th>`).join('')}</tr></thead>`;
-  const bodyRows = gameRows.filter(r => (r.player_slug || r.player_name));
-  const tbody = `<tbody>${bodyRows.map(r =>
-      `<tr>${head.map(h => `<td>${r[h] ?? ''}</td>`).join('')}</tr>`
-    ).join('')}</tbody>`;
-
-  table.innerHTML = `<table class="card">${thead}${tbody}</table>`;
-}
-
-init();
+  tableEl.innerHTML = '';
+  tableEl.appendChild(table);
+})();
