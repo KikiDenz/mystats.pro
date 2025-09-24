@@ -75,7 +75,24 @@ async function init() {
   const missing = validateColumns(rows, REQUIRED_TEAM_COLS);
   const v = document.getElementById('validator');
   if (missing.length) { v.style.display='block'; v.innerHTML = `<strong>Heads up:</strong> Missing columns in team sheet → ${missing.join(', ')}`;}
-  const rec = recordFromTeamSheet(team.name, rows);
+  // slug helpers so names like "Pretty Good" and "Pretty Good Basketball Team" still match
+  const slugify = s => (s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  const isMe = (name) => slugify(name) === team.slug;
+
+// compute record from rows using winner/loser names
+let wins = 0, losses = 0;
+rows.forEach(r => {
+  if (isMe(r["winner"])) wins++;
+  else if (isMe(r["loser"])) losses++;
+});
+const rec = { wins, losses };
+
+document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
+
   document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
 
   const tbody = document.getElementById("gamelog-body");
@@ -88,7 +105,8 @@ async function init() {
     const t2 = r['team2'] || "";
     const s1 = r['score_team1'] || "";
     const s2 = r['score_team2'] || "";
-    const res = (r['winner']||"") === team.name ? "W" : ((r['loser']||"") === team.name ? "L" : "");
+    const res = isMe(r["winner"]) ? "W" : isMe(r["loser"]) ? "L" : "";
+
 
     tr.innerHTML = `
       <td>${date}</td>
@@ -98,12 +116,6 @@ async function init() {
       <td>${r['season'] || ''}</td>
     `;
     tbody.appendChild(tr);
-
-    const slugify = s => (s||"")
-      .toLowerCase()
-      .replaceAll("&","and")
-      .replace(/\s+/g,"-")
-      .trim();
 
     const gameId = `${r.date}_${slugify(r.team1)}_vs_${slugify(r.team2)}`;
     tr.style.cursor = "pointer";
