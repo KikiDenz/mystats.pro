@@ -1,131 +1,107 @@
-import { initThemeToggle, fetchCsv, loadJSON, applyTeamTheme, initSearch } from './app.js';
-const csvFn = (typeof fetchCsvCached==='function') ? fetchCsvCached : fetchCsv;
+import { initThemeToggle, loadJSON, fetchCsv, computePlayerAverages } from './app.js';
 
-const REQUIRED_TEAM_COLS = ['date','team1','team2','score_team1','score_team2','winner','loser','season'];
-function validateColumns(rows, required){
-  if (!rows || !rows.length) return required;
-  const keys = Object.keys(rows[0]||{});
-  return required.filter(k => !keys.includes(k));
+const Q = s => document.querySelector(s);
+const slugify = s => (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const norm = s => (s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const matchTeam = (cell, team) => {
+  const cSlug=slugify(cell), cNorm=norm(cell), tSlug=slugify(team.slug), tNorm=norm(team.name);
+  return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
+};
+
+async function renderRoster(team, players){
+  const grid = Q('#roster-grid'); if(!grid) return;
+  grid.innerHTML='';
+  (team.roster||[]).forEach(sl => {
+    const p = players.find(x=>x.slug===sl); if(!p) return;
+    const a = document.createElement('a');
+    a.className='player-tile'; a.href=`player.html?player=${p.slug}`;
+    a.innerHTML = `<img src="${p.image||'assets/player.png'}" alt=""><div><div class="nm">${p.name}</div><div class="num">#${p.number||''}</div></div>`;
+    grid.appendChild(a);
+  });
 }
 
-function getParam(name) {
-  const url = new URL(window.location.href);
-  return url.searchParams.get(name);
-}
+async function renderLeaders(team){
+  const host = Q('#team-leaders'); if(!host) return;
+  host.innerHTML='';
 
-function recordFromTeamSheet(teamName, rows) {
-  let wins = 0, losses = 0;
-  for (const r of rows) {
-    const t1 = (r['team1']||"").trim();
-    const t2 = (r['team2']||"").trim();
-    const winner = (r['winner']||"").trim();
-    const loser  = (r['loser']||"").trim();
-    if (t1 === teamName || t2 === teamName) {
-      if (winner === teamName) wins++;
-      else if (loser === teamName) losses++;
-      else {
-        // Fallback if winner/loser missing: infer by score
-        const s1 = Number(r['score_team1']||0);
-        const s2 = Number(r['score_team2']||0);
-        if (!isNaN(s1) && !isNaN(s2)) {
-          if ((t1 === teamName && s1 > s2) || (t2 === teamName && s2 > s1)) wins++;
-          else if (s1 !== s2) losses++;
-        }
-      }
+  const controls = document.createElement('div'); controls.className='hstack';
+  const statSel = document.createElement('select'); statSel.className='select';
+  [['pts','Points'],['trb','Rebounds'],['ast','Assists'],['stl','Steals'],['blk','Blocks'],['fgm','FGM'],['fga','FGA'],['3pm','3PM'],['3pa','3PA'],['oreb','Off Reb'],['dreb','Def Reb'],['tov','Turnovers']].forEach(([k,l])=>{
+    const o=document.createElement('option'); o.value=k; o.textContent=l; statSel.appendChild(o);
+  });
+  statSel.value='pts';
+  const modeBtn = document.createElement('button'); modeBtn.className='btn'; modeBtn.dataset.mode='avg'; modeBtn.textContent='Averages';
+  controls.appendChild(statSel); controls.appendChild(modeBtn);
+  host.appendChild(controls);
+  const list = document.createElement('div'); list.className='section'; host.appendChild(list);
+
+  // leaders.json first
+  let pre=null;
+  try {
+    const lj = await loadJSON('data/leaders.json');
+    pre = lj?.teams?.[team.slug] || null;
+  } catch(e){ pre=null; }
+
+  if(pre?.leaders){
+    function refresh(){
+      list.innerHTML='';
+      const mode=modeBtn.dataset.mode, stat=statSel.value;
+      const arr = pre.leaders?.[mode]?.[stat] || [];
+      const tbl = document.createElement('table'); tbl.className='table';
+      tbl.innerHTML = '<thead><tr><th>#</th><th>Player</th><th>Value</th></tr></thead>';
+      const tb = document.createElement('tbody');
+      arr.forEach((r,i)=>{
+        const tr=document.createElement('tr');
+        const val = Number(r.value||0);
+        tr.innerHTML=`<td>${i+1}</td><td>${r.name}</td><td>${(Math.round(val*10)/10).toFixed(1)}</td>`;
+        tb.appendChild(tr);
+      });
+      tbl.appendChild(tb); list.appendChild(tbl);
     }
+    statSel.addEventListener('change', refresh);
+    modeBtn.addEventListener('click', ()=>{ modeBtn.dataset.mode = modeBtn.dataset.mode==='avg' ? 'tot' : 'avg'; modeBtn.textContent = modeBtn.dataset.mode==='avg' ? 'Averages' : 'Totals'; refresh(); });
+    refresh();
+    return;
   }
-  return {wins, losses};
+
+  // fallback live path
+  const players = await loadJSON('data/players.json');
+  const roster=(team.roster||[]).map(sl=>players.find(p=>p.slug===sl)).filter(Boolean);
+  const csvs = await Promise.all(roster.map(p=>p.csvUrl?fetchCsv(p.csvUrl):Promise.resolve([])));
+  const preAgg = roster.map((p,i)=>{
+    const rows=(csvs[i]||[]).filter(r=>matchTeam(r.team||'', team));
+    const avg=computePlayerAverages(rows);
+    const tot=rows.reduce((a,r)=>{
+      const n=k=>Number(r[k]||0);
+      a.pts+=n('pts'); a.trb+=Number(r['totrb']||n('or')+n('dr')); a.ast+=n('ass')||n('hock ass');
+      a.stl+=n('st'); a.blk+=n('bs'); a.tov+=n('to'); a.fgm+=n('fg'); a.fga+=n('fga');
+      a['3pm']+=n('3p'); a['3pa']+=n('3pa'); a.oreb+=n('or'); a.dreb+=n('dr');
+      return a;
+    }, {pts:0,trb:0,ast:0,stl:0,blk:0,tov:0,fgm:0,fga:0,'3pm':0,'3pa':0,oreb:0,dreb:0});
+    return {name:p.name, avg, tot};
+  });
+  function refresh(){
+    list.innerHTML='';
+    const mode=modeBtn.dataset.mode, stat=statSel.value;
+    const arr = preAgg.map(d=>({name:d.name, value: mode==='avg'?(d.avg[stat]||0):(d.tot[stat]||0)})).sort((a,b)=>b.value-a.value);
+    const tbl = document.createElement('table'); tbl.className='table';
+    tbl.innerHTML = '<thead><tr><th>#</th><th>Player</th><th>Value</th></tr></thead>';
+    const tb = document.createElement('tbody');
+    arr.forEach((r,i)=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${i+1}</td><td>${r.name}</td><td>${(Math.round(r.value*10)/10).toFixed(1)}</td>`; tb.appendChild(tr); });
+    tbl.appendChild(tb); list.appendChild(tbl);
+  }
+  statSel.addEventListener('change', refresh);
+  modeBtn.addEventListener('click', ()=>{ modeBtn.dataset.mode = modeBtn.dataset.mode==='avg' ? 'tot' : 'avg'; modeBtn.textContent = modeBtn.dataset.mode==='avg' ? 'Averages' : 'Totals'; refresh(); });
+  refresh();
 }
 
-async function init() {
+async function init(){
   initThemeToggle();
-  initSearch();
-  const slug = getParam("team");
-  const teams = await loadJSON("data/teams.json");
-  const players = await loadJSON("data/players.json");
-  const team = teams.find(t => t.slug === slug) || teams[0];
-  applyTeamTheme(team);
-  // Banner gradient
-  const mode = (localStorage.getItem("theme") || "light");
-  const colors = team.colors?.[mode] || team.colors?.light || {};
-  const p = colors.primary || '#3b82f6';
-  const a = colors.accent || '#60a5fa';
-  const banner = document.getElementById("team-banner");
-  if (banner) banner.style.background = `linear-gradient(135deg, ${p}, ${a})`;
-
-  document.getElementById("team-name").textContent = team.name;
-  document.getElementById("team-logo").src = team.logo;
-
-  // Roster
-  const rosterEl = document.getElementById("roster");
-  rosterEl.innerHTML = "";
-  team.roster.forEach(slug => {
-    const p = players.find(x => x.slug === slug);
-    if (!p) return;
-    const a = document.createElement("a");
-    a.href = `player.html?player=${p.slug}`;
-    a.className = "player-tile";
-    a.innerHTML = `<img src="${p.image}" alt="contain"/>
-                  <div><div class="nm">${p.name}</div>
-                  <div class="num">#${p.number||''}</div></div>`;
-    rosterEl.appendChild(a);
-  });
-
-  // Record and game log
-  const rows = await fetchCsv(team.teamCsv);
-  const missing = validateColumns(rows, REQUIRED_TEAM_COLS);
-  const v = document.getElementById('validator');
-  if (missing.length) { v.style.display='block'; v.innerHTML = `<strong>Heads up:</strong> Missing columns in team sheet → ${missing.join(', ')}`;}
-  // slug helpers so names like "Pretty Good" and "Pretty Good Basketball Team" still match
-  const slugify = s => (s || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-  const isMe = (name) => slugify(name) === team.slug;
-
-// compute record from rows using winner/loser names
-let wins = 0, losses = 0;
-rows.forEach(r => {
-  if (isMe(r["winner"])) wins++;
-  else if (isMe(r["loser"])) losses++;
-});
-const rec = { wins, losses };
-
-document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
-
-  document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
-
-  const tbody = document.getElementById("gamelog-body");
-  tbody.innerHTML = "";
-  rows.forEach(r => {
-    const tr = document.createElement("tr");
-
-    const date = r['date'] || "";
-    const t1 = r['team1'] || "";
-    const t2 = r['team2'] || "";
-    const s1 = r['score_team1'] || "";
-    const s2 = r['score_team2'] || "";
-    const res = isMe(r["winner"]) ? "W" : isMe(r["loser"]) ? "L" : "";
-
-
-    tr.innerHTML = `
-      <td>${date}</td>
-      <td>${t1} vs ${t2}</td>
-      <td>${s1} - ${s2}</td>
-      <td>${res ? `<span class="${res==='W'?'badge-win':'badge-loss'}">${res}</span>` : ''}</td>
-      <td>${r['season'] || ''}</td>
-    `;
-    tbody.appendChild(tr);
-
-    const gameId = `${r.date}_${slugify(r.team1)}_vs_${slugify(r.team2)}`;
-    tr.style.cursor = "pointer";
-    tr.addEventListener("click", () => {
-      window.location.href = `game.html?game_id=${encodeURIComponent(gameId)}`;
-    });
-
-
-  });
+  const [teams, players] = await Promise.all([loadJSON('data/teams.json'), loadJSON('data/players.json')]);
+  const slug = new URL(location.href).searchParams.get('team');
+  const team = teams.find(t=>t.slug===slug);
+  if(!team) return;
+  renderRoster(team, players);
+  await renderLeaders(team);
 }
-
-window.addEventListener("DOMContentLoaded", init);
+window.addEventListener('DOMContentLoaded', init);
