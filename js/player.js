@@ -16,6 +16,16 @@ function slugToTitle(slug){
   return (slug||'').replaceAll('-', ' ').replace(/\b\w/g, c=>c.toUpperCase());
 }
 
+
+  // robust team matching
+  function __slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+  function __norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+  function __teamMatches(cell, teamSlug, teamName){
+    const cSlug = __slugify(cell), cNorm = __norm(cell);
+    const tSlug = __slugify(teamSlug), tNorm = __norm(teamName);
+    return !!(cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm));
+  }
+
 function getSeasonParam() {
   const url = new URL(window.location.href);
   const s = url.searchParams.get('season');
@@ -186,7 +196,7 @@ async function init() {
         try {
           const rows = await fetchCsv(p.csvUrl);
           // keep only rows for this team
-          const filt = rows.filter(r => (r['team']||'').toLowerCase().includes(slugToTitle(teamSlug).toLowerCase()));
+          const filt = rows.filter(r => __teamMatches(r['team']||'', teamSlug, slugToTitle(teamSlug)));
           const avg = computePlayerAverages(filt);
           const totals = filt.reduce((a,r)=>{
             const num = k => Number(r[k]||0);

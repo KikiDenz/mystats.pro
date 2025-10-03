@@ -2,15 +2,13 @@ import { initThemeToggle, fetchCsv, loadJSON, applyTeamTheme, initSearch } from 
 
 const REQUIRED_TEAM_COLS = ['date','team1','team2','score_team1','score_team2','winner','loser','season'];
 function validateColumns(rows, required){
-  if (!rows || !rows.length) return required;
-  const keys = Object.keys(rows[0]||{});
-  return required.filter(k => !keys.includes(k));
-}
+  if (!rows || !rows.length) return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
+    }
 
 function getParam(name) {
   const url = new URL(window.location.href);
-  return url.searchParams.get(name);
-}
+  return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
+    }
 
 function recordFromTeamSheet(teamName, rows) {
   let wins = 0, losses = 0;
@@ -33,8 +31,8 @@ function recordFromTeamSheet(teamName, rows) {
       }
     }
   }
-  return {wins, losses};
-}
+  return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
+    }
 
 async function init() {
   initThemeToggle();
@@ -74,7 +72,7 @@ async function init() {
   const rows = await fetchCsv(team.teamCsv);
   const missing = validateColumns(rows, REQUIRED_TEAM_COLS);
   const v = document.getElementById('validator');
-  if (missing.length) { v.style.display='block'; v.innerHTML = `<strong>Heads up:</strong> Missing columns in team sheet → ${missing.join(', ')}`;}
+  if (missing.length) { v.style.display='block'; v.innerHTML = `<strong>Heads up:</strong> Missing columns includes team sheet → ${missing.join(', ')}`;}
   // slug helpers so names like "Pretty Good" and "Pretty Good Basketball Team" still match
   const slugify = s => (s || "")
     .toLowerCase()
@@ -100,19 +98,18 @@ document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
 
   // --- Team leaders (rank all players; default PTS / Averages) ---
   async function renderTeamLeaders(team) {
+
+  // robust team matching
+  function __slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+  function __norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+  function __teamMatches(cell, teamSlug, teamName){
+    const cSlug = __slugify(cell), cNorm = __norm(cell);
+    const tSlug = __slugify(teamSlug), tNorm = __norm(teamName);
+    return !!(cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm));
+  }
+
     // helper to robustly match team column strings
-    function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
-    function normalizeSpace(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
-    function teamNameMatches(cell, team){
-      const cSlug = slugify(cell);
-      const cNorm = normalizeSpace(cell);
-      const tSlug = team.slug.toLowerCase();
-      const tNorm = normalizeSpace(team.name);
-      // accept exact slug match, or contains of normalized name, or contains team slug words
-      return cSlug === tSlug ||
-             cSlug.includes(tSlug) ||
-             cNorm.includes(tNorm) ||
-             cNorm === tNorm;
+    function slugify(s){ return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
     }
     const host = document.getElementById('team-leaders');
     if (!host) return;
@@ -131,29 +128,7 @@ document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
 
     const list = document.createElement('div'); list.className='section'; host.appendChild(list);
 
-    function slugToTitle(slug){ return (slug||'').replaceAll('-', ' ').replace(/\b\w/g, c=>c.toUpperCase()); }
-
-    async function fetchRosterAgg() {
-      const rosterSlugs = team.roster || [];
-      const out = [];
-      for (const ps of rosterSlugs) {
-        const p = players.find(x => x.slug === ps);
-        if (!p || !p.csvUrl) continue;
-        try {
-          const rows = await fetchCsv(p.csvUrl);
-          const filt = rows.filter(r => teamNameMatches(r['team']||'', team));
-          const avg = computePlayerAverages(filt);
-          const totals = filt.reduce((a,r)=>{
-            const num = k => Number(r[k]||0);
-            a.pts+=num('pts'); a.trb+=Number(r['totrb']||Number(r['or']||0)+Number(r['dr']||0));
-            a.ast+=num('ass')||num('hock ass'); a.stl+=num('st'); a.blk+=num('bs'); a.tov+=num('to');
-            a.fgm+=num('fg'); a.fga+=num('fga'); a["3pm"]+=num('3p'); a["3pa"]+=num('3pa'); a.oreb+=num('or'); a.dreb+=num('dr');
-            return a;
-          }, {pts:0,trb:0,ast:0,stl:0,blk:0,tov:0,fgm:0,fga:0,"3pm":0,"3pa":0,oreb:0,dreb:0});
-          out.push({ name:p.name, avg, tot:totals });
-        } catch(e){ console.warn('csv fail', p.slug, e); }
-      }
-      return out;
+    function slugToTitle(slug){ return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
     }
 
     async function refresh() {
