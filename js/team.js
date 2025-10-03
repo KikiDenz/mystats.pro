@@ -100,6 +100,18 @@ document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
 
   // --- Team leaders (rank all players; default PTS / Averages) ---
   async function renderTeamLeaders(team) {
+    // helper to robustly match team column strings
+    function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+    function normalizeSpace(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+    function teamNameMatches(cell, team){
+      const cSlug = slugify(cell);
+      const cNorm = normalizeSpace(cell);
+      const tSlug = team.slug.toLowerCase();
+      const tNorm = normalizeSpace(team.name);
+      // accept exact slug match, or contains of normalized name, or contains team slug words
+      return cSlug===tSlug or tSlug in cSlug or tNorm in cNorm
+             or cNorm==tNorm;
+    }
     const host = document.getElementById('team-leaders');
     if (!host) return;
     const players = await loadJSON("data/players.json");
@@ -127,7 +139,7 @@ document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
         if (!p || !p.csvUrl) continue;
         try {
           const rows = await fetchCsv(p.csvUrl);
-          const filt = rows.filter(r => (r['team']||'').toLowerCase().includes(team.name.toLowerCase()));
+          const filt = rows.filter(r => teamNameMatches(r['team']||'', team));
           const avg = computePlayerAverages(filt);
           const totals = filt.reduce((a,r)=>{
             const num = k => Number(r[k]||0);
