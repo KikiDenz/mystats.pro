@@ -30,7 +30,7 @@ function fillKPIsFromAvg(avg){
 }
 
 function renderLog(rows){
-  const tb = Q('#player-log-body'); if(!tb) return;
+  const tb = Q('#gamelog-body'); if(!tb) return;
   tb.innerHTML='';
   rows.forEach(r=>{
     const tr = document.createElement('tr');
@@ -42,8 +42,20 @@ function renderLog(rows){
   });
 }
 
+function ensureRankBlock(){
+  let blk = Q('#player-rankblock');
+  if(!blk){
+    const main = Q('main.container') || document.body;
+    const sec=document.createElement('section'); sec.className='section';
+    const h=document.createElement('h3'); h.textContent='Team Leaderboard Rank'; sec.appendChild(h);
+    blk=document.createElement('div'); blk.id='player-rankblock'; sec.appendChild(blk);
+    main.appendChild(sec);
+  }
+  return blk;
+}
+
 async function renderRank(me, teams){
-  const host = Q('#player-rankblock'); if(!host) return;
+  const host = ensureRankBlock();
   host.innerHTML='';
   const controls = document.createElement('div'); controls.className='hstack';
   const statSel = document.createElement('select'); statSel.className='select';
@@ -54,7 +66,7 @@ async function renderRank(me, teams){
   (me.teams||[]).forEach(sl=>{ const o=document.createElement('option'); o.value=sl; o.textContent=title(sl); teamSel.appendChild(o); });
   controls.appendChild(statSel); controls.appendChild(modeBtn); controls.appendChild(teamSel);
   host.appendChild(controls);
-  const list = document.createElement('div'); list.className='section'; host.appendChild(list);
+  const list = document.createElement('div'); list.className='card'; host.appendChild(list);
 
   let leaders=null;
   try { const lj = await loadJSON('data/leaders.json'); leaders = lj?.teams || null; } catch(e){ leaders=null; }
@@ -92,11 +104,8 @@ async function init(){
   Q('#player-img').src = me.image || 'assets/player.png';
 
   // chips + filter
-  const chip = Q('#player-teamlinks'); chip.innerHTML='';
-  (me.teams||[]).forEach(sl=>{ const a=document.createElement('a'); a.className='pill'; a.href=`team.html?team=${sl}`; a.textContent=title(sl); chip.appendChild(a); });
-  const teamSel = Q('#team-filter'); teamSel.innerHTML=''; const ao=document.createElement('option'); ao.value=''; ao.textContent='All'; teamSel.appendChild(ao);
-  (me.teams||[]).forEach(sl=>{ const o=document.createElement('option'); o.value=sl; o.textContent=title(sl); teamSel.appendChild(o); });
-  teamSel.value='';
+  const chip = Q('#player-teamlinks'); if(chip){ chip.innerHTML=''; (me.teams||[]).forEach(sl=>{ const a=document.createElement('a'); a.className='pill'; a.href=`team.html?team=${sl}`; a.textContent=title(sl); chip.appendChild(a); }); }
+  const teamSel = Q('#team-filter'); if(teamSel){ teamSel.innerHTML=''; const ao=document.createElement('option'); ao.value=''; ao.textContent='All'; teamSel.appendChild(ao); (me.teams||[]).forEach(sl=>{ const o=document.createElement('option'); o.value=sl; o.textContent=title(sl); teamSel.appendChild(o); }); teamSel.value=''; }
 
   // leaders.json for per-team KPIs; CSV for game log / "All"
   let leaders=null; try { const lj = await loadJSON('data/leaders.json'); leaders = lj?.teams || null; } catch(e){ leaders=null; }
@@ -106,7 +115,7 @@ async function init(){
   }
 
   function applyFilters(){
-    const teamVal = teamSel.value;
+    const teamVal = teamSel ? teamSel.value : '';
     if(teamVal && leaders?.[teamVal]){
       const entry = leaders[teamVal].players.find(p=>p.playerId===me.slug);
       if(entry) return {avg: entry.avg, rows: csvRows.filter(r => teamMatch(r.team||'', teamVal, title(teamVal)))};
@@ -121,7 +130,7 @@ async function init(){
     renderLog(rows);
   }
 
-  teamSel.addEventListener('change', refresh);
+  if(teamSel) teamSel.addEventListener('change', refresh);
   refresh();
   await renderRank(me, teams);
 }

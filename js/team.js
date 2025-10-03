@@ -3,7 +3,6 @@ import { initThemeToggle, loadJSON, fetchCsv, computePlayerAverages } from './ap
 const Q = s => document.querySelector(s);
 const fmt = v => (v==null || v==='') ? '—' : v;
 
-// --------- helpers for team/game data ----------
 const INDEX_CSV = "https://docs.google.com/spreadsheets/d/15zxpQZJamQfEz07qFtZAI_738cI2rjc2qrrz-q-8Bo0/export?format=csv&gid=0";
 
 function parseRows(text){
@@ -11,6 +10,7 @@ function parseRows(text){
   const heads = lines[0].split(',').map(h=>h.trim().toLowerCase());
   const out=[];
   for(let i=1;i<lines.length;i++){
+    if(!lines[i]) continue;
     const cols = lines[i].split(',').map(s=>s.trim());
     const obj={};
     heads.forEach((h,ix)=> obj[h] = cols[ix] ?? '');
@@ -20,17 +20,32 @@ function parseRows(text){
 }
 
 async function loadIndex(){
-  const res = await fetch(INDEX_CSV, {cache: 'no-store'});
+  const res = await fetch(INDEX_CSV, {cache:'no-store'});
   const txt = await res.text();
   return parseRows(txt);
 }
 
 const slugify = s => (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const norm = s => (s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const matchTeam = (cell, team) => {
+  const cSlug=slugify(cell), cNorm=norm(cell), tSlug=slugify(team.slug), tNorm=norm(team.name);
+  return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
+};
 
-// --------- Roster ----------
+function ensureLeadersContainer(){
+  let sec = Q('#team-leaders-section');
+  if(!sec){
+    const main = Q('main.container') || document.body;
+    sec = document.createElement('section'); sec.className='section'; sec.id='team-leaders-section';
+    const h = document.createElement('h3'); h.textContent='Team Leaders'; sec.appendChild(h);
+    const wrap = document.createElement('div'); wrap.id='team-leaders'; sec.appendChild(wrap);
+    main.appendChild(sec);
+  }
+  return Q('#team-leaders');
+}
+
 async function renderRoster(team, players){
-  const grid = Q('#roster-grid'); if(!grid) return;
+  const grid = Q('#roster'); if(!grid) return;
   grid.innerHTML='';
   (team.roster||[]).forEach(sl => {
     const p = players.find(x=>x.slug===sl); if(!p) return;
@@ -41,7 +56,6 @@ async function renderRoster(team, players){
   });
 }
 
-// --------- Banner & Record + Game Log ----------
 async function renderHeaderAndLog(team){
   const games = await loadIndex();
   const title = Q('#team-name'); if(title) title.textContent = team.name;
@@ -53,9 +67,9 @@ async function renderHeaderAndLog(team){
     const win = is1 ? s1>s2 : s2>s1;
     if(win) acc.w++; else acc.l++; return acc;
   }, {w:0,l:0});
-  const recEl = Q('#team-record'); if(recEl) recEl.textContent = `Record: ${rec.w}-${rec.l}`;
+  const recEl = Q('#record'); if(recEl) recEl.textContent = `${rec.w}-${rec.l}`;
 
-  const tb = Q('#team-games-body'); if(tb){
+  const tb = Q('#gamelog-body'); if(tb){
     tb.innerHTML='';
     games.filter(g => g.team1_slug===team.slug || g.team2_slug===team.slug).forEach(g => {
       const tr = document.createElement('tr');
@@ -68,14 +82,8 @@ async function renderHeaderAndLog(team){
   }
 }
 
-// --------- Leaders (leaders.json first, fallback to live compute) ----------
-const matchTeam = (cell, team) => {
-  const cSlug=slugify(cell), cNorm=norm(cell), tSlug=slugify(team.slug), tNorm=norm(team.name);
-  return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
-};
-
 async function renderLeaders(team){
-  const host = Q('#team-leaders'); if(!host) return;
+  const host = ensureLeadersContainer(); if(!host) return;
   host.innerHTML='';
 
   const controls = document.createElement('div'); controls.className='hstack';
@@ -87,14 +95,11 @@ async function renderLeaders(team){
   const modeBtn = document.createElement('button'); modeBtn.className='btn'; modeBtn.dataset.mode='avg'; modeBtn.textContent='Averages';
   controls.appendChild(statSel); controls.appendChild(modeBtn);
   host.appendChild(controls);
-  const list = document.createElement('div'); list.className='section'; host.appendChild(list);
+  const list = document.createElement('div'); list.className='card'; host.appendChild(list);
 
   // leaders.json first
   let pre=null;
-  try {
-    const lj = await loadJSON('data/leaders.json');
-    pre = lj?.teams?.[team.slug] || null;
-  } catch(e){ pre=null; }
+  try { const lj = await loadJSON('data/leaders.json'); pre = lj?.teams?.[team.slug] || null; } catch(e){ pre=null; }
 
   if(pre?.leaders){
     function refresh(){
