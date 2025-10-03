@@ -1,0 +1,10 @@
+{
+  "name": "mystats-leaders-builder",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-leaders.mjs"
+  },
+  "dependencies": {}
+}
