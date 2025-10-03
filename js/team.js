@@ -97,6 +97,73 @@ document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
 
   const tbody = document.getElementById("gamelog-body");
   tbody.innerHTML = "";
+
+  // --- Team leaders (rank all players; default PTS / Averages) ---
+  async function renderTeamLeaders(team) {
+    const host = document.getElementById('team-leaders');
+    if (!host) return;
+    const players = await loadJSON("data/players.json");
+
+    // controls
+    host.innerHTML = "";
+    const controls = document.createElement('div'); controls.className='hstack';
+    const statSel = document.createElement('select'); statSel.className='select';
+    const opts = [['pts','Points'],['trb','Rebounds'],['ast','Assists'],['stl','Steals'],['blk','Blocks'],['fgm','FGM'],['fga','FGA'],['3pm','3PM'],['3pa','3PA'],['oreb','Off Reb'],['dreb','Def Reb'],['tov','Turnovers']];
+    opts.forEach(([k,l])=>{ const o=document.createElement('option'); o.value=k; o.textContent=l; statSel.appendChild(o); });
+    statSel.value = 'pts';
+    const modeBtn = document.createElement('button'); modeBtn.className='btn'; modeBtn.textContent='Averages'; modeBtn.dataset.mode='avg';
+    controls.appendChild(statSel); controls.appendChild(modeBtn);
+    host.appendChild(controls);
+
+    const list = document.createElement('div'); list.className='section'; host.appendChild(list);
+
+    function slugToTitle(slug){ return (slug||'').replaceAll('-', ' ').replace(/\b\w/g, c=>c.toUpperCase()); }
+
+    async function fetchRosterAgg() {
+      const rosterSlugs = team.roster || [];
+      const out = [];
+      for (const ps of rosterSlugs) {
+        const p = players.find(x => x.slug === ps);
+        if (!p || !p.csvUrl) continue;
+        try {
+          const rows = await fetchCsv(p.csvUrl);
+          const filt = rows.filter(r => (r['team']||'').toLowerCase().includes(team.name.toLowerCase()));
+          const avg = computePlayerAverages(filt);
+          const totals = filt.reduce((a,r)=>{
+            const num = k => Number(r[k]||0);
+            a.pts+=num('pts'); a.trb+=Number(r['totrb']||Number(r['or']||0)+Number(r['dr']||0));
+            a.ast+=num('ass')||num('hock ass'); a.stl+=num('st'); a.blk+=num('bs'); a.tov+=num('to');
+            a.fgm+=num('fg'); a.fga+=num('fga'); a["3pm"]+=num('3p'); a["3pa"]+=num('3pa'); a.oreb+=num('or'); a.dreb+=num('dr');
+            return a;
+          }, {pts:0,trb:0,ast:0,stl:0,blk:0,tov:0,fgm:0,fga:0,"3pm":0,"3pa":0,oreb:0,dreb:0});
+          out.push({ name:p.name, avg, tot:totals });
+        } catch(e){ console.warn('csv fail', p.slug, e); }
+      }
+      return out;
+    }
+
+    async function refresh() {
+      list.innerHTML = '';
+      const mode = modeBtn.dataset.mode; const stat = statSel.value;
+      const data = await fetchRosterAgg();
+      if (!data.length) { list.textContent = 'No data yet…'; return; }
+      const rows = data.map(d => ({ name:d.name, val: mode==='avg' ? (d.avg[stat]||0) : (d.tot[stat]||0) }));
+      rows.sort((a,b)=> (b.val - a.val));
+
+      const table = document.createElement('table'); table.className='table';
+      table.innerHTML = '<thead><tr><th>#</th><th>Player</th><th>Value</th></tr></thead>';
+      const tb = document.createElement('tbody');
+      rows.forEach((r,i)=>{ const tr=document.createElement('tr'); tr.innerHTML = `<td>${i+1}</td><td>${r.name}</td><td>${(Math.round(r.val*10)/10).toFixed(1)}</td>`; tb.appendChild(tr); });
+      table.appendChild(tb);
+      list.appendChild(table);
+    }
+
+    statSel.addEventListener('change', refresh);
+    modeBtn.addEventListener('click', ()=>{ modeBtn.dataset.mode = modeBtn.dataset.mode==='avg' ? 'tot' : 'avg'; modeBtn.textContent = modeBtn.dataset.mode==='avg' ? 'Averages' : 'Totals'; refresh(); });
+
+    await refresh();
+  }
+
   rows.forEach(r => {
     const tr = document.createElement("tr");
 
@@ -125,6 +192,9 @@ document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
 
 
   });
+
+  // Leaders section
+  await renderTeamLeaders(team);
 }
 
 window.addEventListener("DOMContentLoaded", init);

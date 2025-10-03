@@ -9,7 +9,124 @@
 </head>
 <body>
 <header class="header">
+  <div class="brand"><a href="index<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Player — mystats.pro</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header">
   <div class="brand"><a href="index.html" class="badge">mystats.pro</a></div>
+  <div class="actions">
+    <div class="search"><input id="search" placeholder="Search team or player"/></div>
+    <button id="theme-toggle" class="toggle">Dark mode</button>
+  </div>
+</header>
+<main class="container vstack">
+  <div id="validator" class="toast" style="display:none"></div>
+  <div class="player-hero card">
+    <img id="player-img" alt="player"/>
+    <div class="vstack">
+      <div style="font-size:28px; font-weight:800;" id="player-name"></div>
+      <div id="player-teamlinks" class="pills"></div>
+      <div id="player-meta" style="color:var(--muted)"></div>
+      <div class="hstack">
+        <label>Team:</label>
+        <select id="team-filter" class="select"></select>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="hstack" style="justify-content: space-between;">
+      <div class="tabs">
+        <button class="tab" id="tab-career">Career (across all teams)</button>
+        <button class="tab" id="tab-season" style="display:none">Season</button>
+      </div>
+      <div class="hstack">
+        <label for="season-year">Year</label>
+        <select id="season-year" class="select"></select>
+      </div>
+    </div>
+    
+    <div class="kpis section">
+      <div class="kpi"><div class="bubble" id="c-pts">0.0</div><div class="label">PTS</div></div>
+      <div class="kpi"><div class="bubble" id="c-trb">0.0</div><div class="label">REB</div></div>
+      <div class="kpi"><div class="bubble" id="c-ast">0.0</div><div class="label">AST</div></div>
+      <div class="kpi"><div class="bubble" id="c-fg">0%</div><div class="label">FG%</div></div>
+      <div class="kpi"><div class="bubble" id="c-3p">0%</div><div class="label">3P%</div></div>
+      <div class="kpi"><div class="bubble" id="c-ft">0%</div><div class="label">FT%</div></div>
+    
+      <div class="kpis section">
+        <div class="kpi"><div class="bubble" id="c-stl">0.0</div><div class="label">STL</div></div>
+        <div class="kpi"><div class="bubble" id="c-blk">0.0</div><div class="label">BLK</div></div>
+        <div class="kpi"><div class="bubble" id="c-fgm">0.0</div><div class="label">FGM</div></div>
+        <div class="kpi"><div class="bubble" id="c-fga">0.0</div><div class="label">FGA</div></div>
+        <div class="kpi"><div class="bubble" id="c-3pm">0.0</div><div class="label">3PM</div></div>
+        <div class="kpi"><div class="bubble" id="c-3pa">0.0</div><div class="label">3PA</div></div>
+        <div class="kpi"><div class="bubble" id="c-or">0.0</div><div class="label">OR</div></div>
+        <div class="kpi"><div class="bubble" id="c-dr">0.0</div><div class="label">DR</div></div>
+        <div class="kpi"><div class="bubble" id="c-tov">0.0</div><div class="label">TOV</div></div>
+      </div>
+    </div>
+  </section>
+    
+
+  <section class="section">
+    <h3>Team Leaderboard Rank</h3>
+    <div class="card" id="player-rankblock"></div>
+  </section>
+
+  <section class="section">
+    <h3>Game Log</h3>
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Team</th>
+            <th>Opp</th>
+            <th>MIN</th>
+            <th>FG</th>
+            <th>3P</th>
+            <th>FT</th>
+            <th>OR</th>
+            <th>DR</th>
+            <th>TRB</th>
+            <th>AST</th>
+            <th>STL</th>
+            <th>BLK</th>
+            <th>TOV</th>
+            <th>PTS</th>
+            <!-- <th>FG%</th><th>3P%</th><th>FT%</th> -->
+          </tr>
+        </thead>
+        <tbody id="gamelog-body"></tbody>
+      </table>
+    
+      <div class="kpis section">
+        <div class="kpi"><div class="bubble" id="c-stl">0.0</div><div class="label">STL</div></div>
+        <div class="kpi"><div class="bubble" id="c-blk">0.0</div><div class="label">BLK</div></div>
+        <div class="kpi"><div class="bubble" id="c-fgm">0.0</div><div class="label">FGM</div></div>
+        <div class="kpi"><div class="bubble" id="c-fga">0.0</div><div class="label">FGA</div></div>
+        <div class="kpi"><div class="bubble" id="c-3pm">0.0</div><div class="label">3PM</div></div>
+        <div class="kpi"><div class="bubble" id="c-3pa">0.0</div><div class="label">3PA</div></div>
+        <div class="kpi"><div class="bubble" id="c-or">0.0</div><div class="label">OR</div></div>
+        <div class="kpi"><div class="bubble" id="c-dr">0.0</div><div class="label">DR</div></div>
+        <div class="kpi"><div class="bubble" id="c-tov">0.0</div><div class="label">TOV</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer container">© <span id="year"></span> mystats.pro </footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script type="module" src="js/player.js"></script>
+</body>
+</html>.html" class="badge">mystats.pro</a></div>
   <div class="actions">
     <div class="search"><input id="search" placeholder="Search team or player"/></div>
     <button id="theme-toggle" class="toggle">Dark mode</button>
