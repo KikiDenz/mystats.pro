@@ -50,7 +50,7 @@
   {
     "slug": "josh-todd",
     "name": "Josh Todd",
-    "number": "",
+    "number": "11",
     "position": "Forward",
     "image": "assets/placeholder2.png",
     "teams": [
@@ -61,7 +61,7 @@
   {
     "slug": "rhys-ogle",
     "name": "Rhys Ogle",
-    "number": "",
+    "number": "6",
     "position": "Forward",
     "image": "assets/placeholder2.png",
     "teams": [
@@ -72,7 +72,7 @@
   {
     "slug": "jarren-owen",
     "name": "Jarren Owen",
-    "number": "",
+    "number": "5",
     "position": "Guard",
     "image": "assets/placeholder1.png",
     "teams": [
@@ -83,7 +83,7 @@
   {
     "slug": "callan-beamish",
     "name": "Callan Beamish",
-    "number": "",
+    "number": "21",
     "position": "Center",
     "image": "assets/placeholder2.png",
     "teams": [
