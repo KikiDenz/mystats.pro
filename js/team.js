@@ -109,8 +109,10 @@ document.getElementById("record").textContent = `${rec.wins}-${rec.losses}`;
       const tSlug = team.slug.toLowerCase();
       const tNorm = normalizeSpace(team.name);
       // accept exact slug match, or contains of normalized name, or contains team slug words
-      return cSlug===tSlug or tSlug in cSlug or tNorm in cNorm
-             or cNorm==tNorm;
+      return cSlug === tSlug ||
+             cSlug.includes(tSlug) ||
+             cNorm.includes(tNorm) ||
+             cNorm === tNorm;
     }
     const host = document.getElementById('team-leaders');
     if (!host) return;
