@@ -1,0 +1,2257 @@
+{
+  "generated_at": "2025-10-03T12:13:58.469Z",
+  "version": 1,
+  "teams": {
+    "pretty-good": {
+      "name": "Pretty Good Basketball Team",
+      "players": [
+        {
+          "playerId": "kyle-denzin",
+          "name": "Kyle Denzin",
+          "avg": {
+            "pts": 6,
+            "trb": 6,
+            "ast": 1,
+            "stl": 3,
+            "blk": 0,
+            "tov": 1.5,
+            "fgm": 2,
+            "fga": 14.5,
+            "3pm": 2,
+            "3pa": 11,
+            "oreb": 1.5,
+            "dreb": 4.5,
+            "fgPct": 0.13793103448275862,
+            "tpPct": 0.18181818181818182,
+            "ftPct": 0
+          },
+          "tot": {
+            "pts": 12,
+            "trb": 12,
+            "ast": 2,
+            "stl": 6,
+            "blk": 0,
+            "tov": 3,
+            "fgm": 4,
+            "fga": 29,
+            "3pm": 4,
+            "3pa": 22,
+            "oreb": 3,
+            "dreb": 9
+          }
+        },
+        {
+          "playerId": "levi-denzin",
+          "name": "Levi Denzin",
+          "avg": {
+            "pts": 13.333333333333334,
+            "trb": 4.333333333333333,
+            "ast": 1.6666666666666667,
+            "stl": 0.6666666666666666,
+            "blk": 0.3333333333333333,
+            "tov": 1.3333333333333333,
+            "fgm": 4.666666666666667,
+            "fga": 13,
+            "3pm": 3.3333333333333335,
+            "3pa": 9.666666666666666,
+            "oreb": 1.6666666666666667,
+            "dreb": 2.6666666666666665,
+            "fgPct": 0.358974358974359,
+            "tpPct": 0.3448275862068966,
+            "ftPct": 1
+          },
+          "tot": {
+            "pts": 40,
+            "trb": 13,
+            "ast": 5,
+            "stl": 2,
+            "blk": 1,
+            "tov": 4,
+            "fgm": 14,
+            "fga": 39,
+            "3pm": 10,
+            "3pa": 29,
+            "oreb": 5,
+            "dreb": 8
+          }
+        },
+        {
+          "playerId": "findlay-wendtman",
+          "name": "Findlay Wendtman",
+          "avg": {
+            "pts": 13.75,
+            "trb": 1.75,
+            "ast": 4.25,
+            "stl": 2.5,
+            "blk": 0.5,
+            "tov": 3,
+            "fgm": 5,
+            "fga": 9.5,
+            "3pm": 2.25,
+            "3pa": 4.25,
+            "oreb": 0.5,
+            "dreb": 1.25,
+            "fgPct": 0.5263157894736842,
+            "tpPct": 0.5294117647058824,
+            "ftPct": 0.6
+          },
+          "tot": {
+            "pts": 55,
+            "trb": 7,
+            "ast": 17,
+            "stl": 10,
+            "blk": 2,
+            "tov": 12,
+            "fgm": 20,
+            "fga": 38,
+            "3pm": 9,
+            "3pa": 17,
+            "oreb": 2,
+            "dreb": 5
+          }
+        },
+        {
+          "playerId": "jackson-neaves",
+          "name": "Jackson Neaves",
+          "avg": {
+            "pts": 7.666666666666667,
+            "trb": 9.666666666666666,
+            "ast": 1,
+            "stl": 0.3333333333333333,
+            "blk": 0.6666666666666666,
+            "tov": 0.6666666666666666,
+            "fgm": 2.3333333333333335,
+            "fga": 5,
+            "3pm": 0.3333333333333333,
+            "3pa": 2,
+            "oreb": 2,
+            "dreb": 7.666666666666667,
+            "fgPct": 0.4666666666666667,
+            "tpPct": 0.16666666666666666,
+            "ftPct": 0.8888888888888888
+          },
+          "tot": {
+            "pts": 23,
+            "trb": 29,
+            "ast": 3,
+            "stl": 1,
+            "blk": 2,
+            "tov": 2,
+            "fgm": 7,
+            "fga": 15,
+            "3pm": 1,
+            "3pa": 6,
+            "oreb": 6,
+            "dreb": 23
+          }
+        },
+        {
+          "playerId": "josh-todd",
+          "name": "Josh Todd",
+          "avg": {
+            "pts": 10.75,
+            "trb": 10.5,
+            "ast": 4.25,
+            "stl": 2.25,
+            "blk": 0.5,
+            "tov": 3.5,
+            "fgm": 4.25,
+            "fga": 10.75,
+            "3pm": 0.5,
+            "3pa": 3.5,
+            "oreb": 2.75,
+            "dreb": 7.75,
+            "fgPct": 0.3953488372093023,
+            "tpPct": 0.14285714285714285,
+            "ftPct": 0.6363636363636364
+          },
+          "tot": {
+            "pts": 43,
+            "trb": 42,
+            "ast": 17,
+            "stl": 9,
+            "blk": 2,
+            "tov": 14,
+            "fgm": 17,
+            "fga": 43,
+            "3pm": 2,
+            "3pa": 14,
+            "oreb": 11,
+            "dreb": 31
+          }
+        },
+        {
+          "playerId": "rhys-ogle",
+          "name": "Rhys Ogle",
+          "avg": {
+            "pts": 8.5,
+            "trb": 5,
+            "ast": 3,
+            "stl": 0.5,
+            "blk": 0.5,
+            "tov": 2.5,
+            "fgm": 3.5,
+            "fga": 8.5,
+            "3pm": 0.5,
+            "3pa": 3.5,
+            "oreb": 1,
+            "dreb": 4,
+            "fgPct": 0.4117647058823529,
+            "tpPct": 0.14285714285714285,
+            "ftPct": 0.5
+          },
+          "tot": {
+            "pts": 17,
+            "trb": 10,
+            "ast": 6,
+            "stl": 1,
+            "blk": 1,
+            "tov": 5,
+            "fgm": 7,
+            "fga": 17,
+            "3pm": 1,
+            "3pa": 7,
+            "oreb": 2,
+            "dreb": 8
+          }
+        },
+        {
+          "playerId": "jarren-owen",
+          "name": "Jarren Owen",
+          "avg": {
+            "pts": 8.333333333333334,
+            "trb": 4,
+            "ast": 6,
+            "stl": 1.6666666666666667,
+            "blk": 0,
+            "tov": 1.3333333333333333,
+            "fgm": 2.6666666666666665,
+            "fga": 7.333333333333333,
+            "3pm": 2.6666666666666665,
+            "3pa": 7.333333333333333,
+            "oreb": 0.6666666666666666,
+            "dreb": 3.3333333333333335,
+            "fgPct": 0.36363636363636365,
+            "tpPct": 0.36363636363636365,
+            "ftPct": 0.5
+          },
+          "tot": {
+            "pts": 25,
+            "trb": 12,
+            "ast": 18,
+            "stl": 5,
+            "blk": 0,
+            "tov": 4,
+            "fgm": 8,
+            "fga": 22,
+            "3pm": 8,
+            "3pa": 22,
+            "oreb": 2,
+            "dreb": 10
+          }
+        },
+        {
+          "playerId": "callan-beamish",
+          "name": "Callan Beamish",
+          "avg": {
+            "pts": 5.5,
+            "trb": 4.5,
+            "ast": 2.5,
+            "stl": 4.5,
+            "blk": 0,
+            "tov": 1,
+            "fgm": 2,
+            "fga": 5,
+            "3pm": 0,
+            "3pa": 0,
+            "oreb": 1.5,
+            "dreb": 3,
+            "fgPct": 0.4,
+            "tpPct": 0,
+            "ftPct": 0.6
+          },
+          "tot": {
+            "pts": 11,
+            "trb": 9,
+            "ast": 5,
+            "stl": 9,
+            "blk": 0,
+            "tov": 2,
+            "fgm": 4,
+            "fga": 10,
+            "3pm": 0,
+            "3pa": 0,
+            "oreb": 3,
+            "dreb": 6
+          }
+        }
+      ],
+      "leaders": {
+        "avg": {
+          "pts": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 13.75
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 13.333333333333334
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 10.75
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 8.5
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 8.333333333333334
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 7.666666666666667
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 6
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 5.5
+            }
+          ],
+          "trb": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 10.5
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 9.666666666666666
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 6
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 5
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 4.5
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 4.333333333333333
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 4
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 1.75
+            }
+          ],
+          "ast": [
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 6
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 4.25
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 4.25
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 3
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 2.5
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 1.6666666666666667
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 1
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 1
+            }
+          ],
+          "stl": [
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 4.5
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 2.5
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 2.25
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 1.6666666666666667
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 0.6666666666666666
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 0.5
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0.3333333333333333
+            }
+          ],
+          "blk": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0.6666666666666666
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 0.5
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 0.5
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 0.5
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 0.3333333333333333
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 0
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 0
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 0
+            }
+          ],
+          "tov": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 3.5
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 3
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 2.5
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 1.5
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 1.3333333333333333
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 1.3333333333333333
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 1
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0.6666666666666666
+            }
+          ],
+          "fgm": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 5
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 4.666666666666667
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 4.25
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 3.5
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 2.6666666666666665
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 2.3333333333333335
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 2
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 2
+            }
+          ],
+          "fga": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 14.5
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 13
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 10.75
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 9.5
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 8.5
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 7.333333333333333
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 5
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 5
+            }
+          ],
+          "3pm": [
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 3.3333333333333335
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 2.6666666666666665
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 2.25
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 2
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 0.5
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 0.5
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0.3333333333333333
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 0
+            }
+          ],
+          "3pa": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 11
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 9.666666666666666
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 7.333333333333333
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 4.25
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 3.5
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 3.5
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 2
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 0
+            }
+          ],
+          "oreb": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 2.75
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 2
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 1.6666666666666667
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 1.5
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 1.5
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 1
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 0.6666666666666666
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 0.5
+            }
+          ],
+          "dreb": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 7.75
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 7.666666666666667
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 4.5
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 4
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 3.3333333333333335
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 3
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 2.6666666666666665
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 1.25
+            }
+          ]
+        },
+        "tot": {
+          "pts": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 55
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 43
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 40
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 25
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 23
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 17
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 12
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 11
+            }
+          ],
+          "trb": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 42
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 29
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 13
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 12
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 12
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 10
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 9
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 7
+            }
+          ],
+          "ast": [
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 18
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 17
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 17
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 6
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 5
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 5
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 3
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 2
+            }
+          ],
+          "stl": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 10
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 9
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 9
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 6
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 5
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 2
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 1
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 1
+            }
+          ],
+          "blk": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 2
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 2
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 2
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 1
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 1
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 0
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 0
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 0
+            }
+          ],
+          "tov": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 14
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 12
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 5
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 4
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 4
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 2
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 2
+            }
+          ],
+          "fgm": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 20
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 17
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 14
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 8
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 7
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 7
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 4
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 4
+            }
+          ],
+          "fga": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 43
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 39
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 38
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 29
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 22
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 17
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 15
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 10
+            }
+          ],
+          "3pm": [
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 10
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 9
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 8
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 4
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 2
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 1
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 1
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 0
+            }
+          ],
+          "3pa": [
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 29
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 22
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 22
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 17
+            },
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 14
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 7
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 6
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 0
+            }
+          ],
+          "oreb": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 11
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 6
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 5
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 3
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 2
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 2
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 2
+            }
+          ],
+          "dreb": [
+            {
+              "playerId": "josh-todd",
+              "name": "Josh Todd",
+              "value": 31
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 23
+            },
+            {
+              "playerId": "jarren-owen",
+              "name": "Jarren Owen",
+              "value": 10
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 9
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
+              "value": 8
+            },
+            {
+              "playerId": "rhys-ogle",
+              "name": "Rhys Ogle",
+              "value": 8
+            },
+            {
+              "playerId": "callan-beamish",
+              "name": "Callan Beamish",
+              "value": 6
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 5
+            }
+          ]
+        }
+      }
+    },
+    "duncles": {
+      "name": "Duncles",
+      "players": [
+        {
+          "playerId": "kyle-denzin",
+          "name": "Kyle Denzin",
+          "avg": {
+            "pts": 17,
+            "trb": 11,
+            "ast": 7,
+            "stl": 2,
+            "blk": 0,
+            "tov": 0,
+            "fgm": 7,
+            "fga": 18,
+            "3pm": 3,
+            "3pa": 9,
+            "oreb": 4,
+            "dreb": 7,
+            "fgPct": 0.3888888888888889,
+            "tpPct": 0.3333333333333333,
+            "ftPct": 0
+          },
+          "tot": {
+            "pts": 17,
+            "trb": 11,
+            "ast": 7,
+            "stl": 2,
+            "blk": 0,
+            "tov": 0,
+            "fgm": 7,
+            "fga": 18,
+            "3pm": 3,
+            "3pa": 9,
+            "oreb": 4,
+            "dreb": 7
+          }
+        }
+      ],
+      "leaders": {
+        "avg": {
+          "pts": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 17
+            }
+          ],
+          "trb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 11
+            }
+          ],
+          "ast": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 7
+            }
+          ],
+          "stl": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 2
+            }
+          ],
+          "blk": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 0
+            }
+          ],
+          "tov": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 0
+            }
+          ],
+          "fgm": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 7
+            }
+          ],
+          "fga": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 18
+            }
+          ],
+          "3pm": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            }
+          ],
+          "3pa": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 9
+            }
+          ],
+          "oreb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 4
+            }
+          ],
+          "dreb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 7
+            }
+          ]
+        },
+        "tot": {
+          "pts": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 17
+            }
+          ],
+          "trb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 11
+            }
+          ],
+          "ast": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 7
+            }
+          ],
+          "stl": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 2
+            }
+          ],
+          "blk": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 0
+            }
+          ],
+          "tov": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 0
+            }
+          ],
+          "fgm": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 7
+            }
+          ],
+          "fga": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 18
+            }
+          ],
+          "3pm": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            }
+          ],
+          "3pa": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 9
+            }
+          ],
+          "oreb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 4
+            }
+          ],
+          "dreb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 7
+            }
+          ]
+        }
+      }
+    },
+    "sweaty-already": {
+      "name": "Sweaty Already",
+      "players": [
+        {
+          "playerId": "codey-nowland",
+          "name": "Codey Nowland",
+          "avg": {
+            "pts": 0,
+            "trb": 0,
+            "ast": 0,
+            "stl": 0,
+            "blk": 0,
+            "tov": 0,
+            "fgm": 0,
+            "fga": 0,
+            "3pm": 0,
+            "3pa": 0,
+            "oreb": 0,
+            "dreb": 0,
+            "fgPct": 0,
+            "tpPct": 0,
+            "ftPct": 0
+          },
+          "tot": {
+            "pts": 0,
+            "trb": 0,
+            "ast": 0,
+            "stl": 0,
+            "blk": 0,
+            "tov": 0,
+            "fgm": 0,
+            "fga": 0,
+            "3pm": 0,
+            "3pa": 0,
+            "oreb": 0,
+            "dreb": 0
+          }
+        },
+        {
+          "playerId": "kyle-denzin",
+          "name": "Kyle Denzin",
+          "avg": {
+            "pts": 15,
+            "trb": 10,
+            "ast": 7,
+            "stl": 3,
+            "blk": 0,
+            "tov": 4,
+            "fgm": 6,
+            "fga": 19,
+            "3pm": 3,
+            "3pa": 13,
+            "oreb": 5,
+            "dreb": 5,
+            "fgPct": 0.3157894736842105,
+            "tpPct": 0.23076923076923078,
+            "ftPct": 0
+          },
+          "tot": {
+            "pts": 15,
+            "trb": 10,
+            "ast": 7,
+            "stl": 3,
+            "blk": 0,
+            "tov": 4,
+            "fgm": 6,
+            "fga": 19,
+            "3pm": 3,
+            "3pa": 13,
+            "oreb": 5,
+            "dreb": 5
+          }
+        }
+      ],
+      "leaders": {
+        "avg": {
+          "pts": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 15
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "trb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 10
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "ast": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 7
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "stl": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "blk": [
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 0
+            }
+          ],
+          "tov": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 4
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "fgm": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 6
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "fga": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 19
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "3pm": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "3pa": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 13
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "oreb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 5
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "dreb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 5
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ]
+        },
+        "tot": {
+          "pts": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 15
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "trb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 10
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "ast": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 7
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "stl": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "blk": [
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 0
+            }
+          ],
+          "tov": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 4
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "fgm": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 6
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "fga": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 19
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "3pm": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 3
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "3pa": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 13
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "oreb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 5
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ],
+          "dreb": [
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
+              "value": 5
+            },
+            {
+              "playerId": "codey-nowland",
+              "name": "Codey Nowland",
+              "value": 0
+            }
+          ]
+        }
+      }
+    },
+    "chuckers-chuckers": {
+      "name": "Chuckers Chuckers",
+      "players": [
+        {
+          "playerId": "findlay-wendtman",
+          "name": "Findlay Wendtman",
+          "avg": {
+            "pts": 7.8,
+            "trb": 4,
+            "ast": 2.6,
+            "stl": 2.6,
+            "blk": 0.8,
+            "tov": 1.2,
+            "fgm": 3.2,
+            "fga": 8.6,
+            "3pm": 1.4,
+            "3pa": 4,
+            "oreb": 0.4,
+            "dreb": 3.6,
+            "fgPct": 0.37209302325581395,
+            "tpPct": 0.35,
+            "ftPct": 0
+          },
+          "tot": {
+            "pts": 39,
+            "trb": 20,
+            "ast": 13,
+            "stl": 13,
+            "blk": 4,
+            "tov": 6,
+            "fgm": 16,
+            "fga": 43,
+            "3pm": 7,
+            "3pa": 20,
+            "oreb": 2,
+            "dreb": 18
+          }
+        },
+        {
+          "playerId": "jackson-neaves",
+          "name": "Jackson Neaves",
+          "avg": {
+            "pts": 3,
+            "trb": 7.666666666666667,
+            "ast": 0,
+            "stl": 1,
+            "blk": 1.3333333333333333,
+            "tov": 1.6666666666666667,
+            "fgm": 1,
+            "fga": 3,
+            "3pm": 0,
+            "3pa": 0.6666666666666666,
+            "oreb": 1.3333333333333333,
+            "dreb": 6.333333333333333,
+            "fgPct": 0.3333333333333333,
+            "tpPct": 0,
+            "ftPct": 0.6
+          },
+          "tot": {
+            "pts": 9,
+            "trb": 23,
+            "ast": 0,
+            "stl": 3,
+            "blk": 4,
+            "tov": 5,
+            "fgm": 3,
+            "fga": 9,
+            "3pm": 0,
+            "3pa": 2,
+            "oreb": 4,
+            "dreb": 19
+          }
+        }
+      ],
+      "leaders": {
+        "avg": {
+          "pts": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 7.8
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 3
+            }
+          ],
+          "trb": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 7.666666666666667
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 4
+            }
+          ],
+          "ast": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 2.6
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0
+            }
+          ],
+          "stl": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 2.6
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 1
+            }
+          ],
+          "blk": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 1.3333333333333333
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 0.8
+            }
+          ],
+          "tov": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 1.6666666666666667
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 1.2
+            }
+          ],
+          "fgm": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 3.2
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 1
+            }
+          ],
+          "fga": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 8.6
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 3
+            }
+          ],
+          "3pm": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 1.4
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0
+            }
+          ],
+          "3pa": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 4
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0.6666666666666666
+            }
+          ],
+          "oreb": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 1.3333333333333333
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 0.4
+            }
+          ],
+          "dreb": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 6.333333333333333
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 3.6
+            }
+          ]
+        },
+        "tot": {
+          "pts": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 39
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 9
+            }
+          ],
+          "trb": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 23
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 20
+            }
+          ],
+          "ast": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 13
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0
+            }
+          ],
+          "stl": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 13
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 3
+            }
+          ],
+          "blk": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 4
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 4
+            }
+          ],
+          "tov": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 6
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 5
+            }
+          ],
+          "fgm": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 16
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 3
+            }
+          ],
+          "fga": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 43
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 9
+            }
+          ],
+          "3pm": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 7
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0
+            }
+          ],
+          "3pa": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 20
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 2
+            }
+          ],
+          "oreb": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 4
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 2
+            }
+          ],
+          "dreb": [
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 19
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 18
+            }
+          ]
+        }
+      }
+    }
+  }
+}
