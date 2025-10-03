@@ -1,4 +1,5 @@
 import { initThemeToggle, fetchCsv, loadJSON, applyTeamTheme, initSearch } from './app.js';
+const csvFn = (typeof fetchCsvCached==='function') ? fetchCsvCached : fetchCsv;
 
 const REQUIRED_TEAM_COLS = ['date','team1','team2','score_team1','score_team2','winner','loser','season'];
 function validateColumns(rows, required){

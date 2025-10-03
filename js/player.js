@@ -1,4 +1,5 @@
 import { initThemeToggle, fetchCsv, computePlayerAverages, byYear, loadJSON, initSearch, pct, oneDec } from './app.js';
+const csvFn = (typeof fetchCsvCached==='function') ? fetchCsvCached : fetchCsv;
 
 const REQUIRED_PLAYER_COLS = ['date','position','team','opponent','min','fg','fga','3p','3pa','ft','fta','or','dr','totrb','ass','pf','st','bs','to','pts'];
 function validateColumns(rows, required){
