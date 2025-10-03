@@ -3,29 +3,73 @@ name: Build Leaders JSON
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'  # hourly; adjust as needed
+    - cron: '0 * * * *'  # hourly
 
 permissions:
-  contents: write
+  contents: write   # allow pushing with GITHUB_TOKEN
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
+          # fetch full history so rebase/push works if needed
+          fetch-depth: 0
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install (no deps)
-        run: echo "No dependencies"
-      - name: Build leaders.json
-        run: node tools/build-leaders.mjs
+
+      # Optional: show repo state (helps when debugging)
+      - name: Debug repo
+        run: |
+          echo "Ref: $GITHUB_REF  Branch: $GITHUB_REF_NAME"
+          git status
+          ls -la
+          test -f tools/build-leaders.mjs && echo "builder present" || (echo "builder missing"; exit 1)
+
+      - name: Build leaders.json (log verbosely)
+        id: build
+        run: |
+          set -euo pipefail
+          node --version
+          echo "Running builder…"
+          node tools/build-leaders.mjs | tee build.log
+          echo "Exit code: $?"
+          echo "Preview leaders.json:"
+          head -c 1200 data/leaders.json || true
+          test -s data/leaders.json || (echo "ERROR: data/leaders.json not created or empty"; exit 2)
+
+      - name: Upload leaders.json artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: leaders.json
+          path: data/leaders.json
+          if-no-files-found: error
+
       - name: Commit and push if changed
         run: |
-          git config user.name "github-actions[bot]"
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add data/leaders.json
-          git diff --staged --quiet || git commit -m "ci: update leaders.json"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "ci: update leaders.json"
+
+          # Try a fast push; if it fails (non-fast-forward), rebase on remote and push again.
+          if git push; then
+            echo "Pushed successfully."
+          else
+            echo "Fast push failed. Rebase and retry…"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
