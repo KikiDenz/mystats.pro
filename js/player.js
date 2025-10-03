@@ -29,6 +29,19 @@ function fillKPIsFromAvg(avg){
   setText('c-tov', oneDec(avg.tov));
 }
 
+function renderLog(rows){
+  const tb = Q('#player-log-body'); if(!tb) return;
+  tb.innerHTML='';
+  rows.forEach(r=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.date||''}</td><td>${r.team||''}</td><td>${r.opponent||r.opp||''}</td>
+      <td>${r.min||''}</td><td>${r.fg||0}/${r.fga||0}</td><td>${r['3p']||0}/${r['3pa']||0}</td><td>${r.ft||0}/${r.fta||0}</td>
+      <td>${r.or||0}</td><td>${r.dr||0}</td><td>${r.totrb||((+r.or||0)+(+r.dr||0))}</td>
+      <td>${r.ass||r['hock ass']||0}</td><td>${r.st||0}</td><td>${r.bs||0}</td><td>${r.to||0}</td><td>${r.pts||0}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
 async function renderRank(me, teams){
   const host = Q('#player-rankblock'); if(!host) return;
   host.innerHTML='';
@@ -59,7 +72,6 @@ async function renderRank(me, teams){
       tbl.appendChild(tb); list.appendChild(tbl);
       return;
     }
-    // fallback: do nothing here (older live path uses CSV in previous versions)
     list.textContent = 'No data yet…';
   }
 
@@ -86,10 +98,8 @@ async function init(){
   (me.teams||[]).forEach(sl=>{ const o=document.createElement('option'); o.value=sl; o.textContent=title(sl); teamSel.appendChild(o); });
   teamSel.value='';
 
-  // Try to fill KPIs from leaders.json when a specific team is selected
+  // leaders.json for per-team KPIs; CSV for game log / "All"
   let leaders=null; try { const lj = await loadJSON('data/leaders.json'); leaders = lj?.teams || null; } catch(e){ leaders=null; }
-
-  // Fallback CSV for "All"
   let csvRows=[];
   if(me.csvUrl){
     try { csvRows = await fetchCsv(me.csvUrl); } catch(e){ csvRows=[]; }
@@ -98,22 +108,21 @@ async function init(){
   function applyFilters(){
     const teamVal = teamSel.value;
     if(teamVal && leaders?.[teamVal]){
-      // use leaders per team
       const entry = leaders[teamVal].players.find(p=>p.playerId===me.slug);
-      if(entry) return {source:'leaders', avg:entry.avg};
+      if(entry) return {avg: entry.avg, rows: csvRows.filter(r => teamMatch(r.team||'', teamVal, title(teamVal)))};
     }
-    // fallback: CSV across all or filtered
     const filt = teamVal ? csvRows.filter(r => teamMatch(r.team||'', teamVal, title(teamVal))) : csvRows;
-    return {source:'csv', avg: computePlayerAverages(filt)};
+    return {avg: computePlayerAverages(filt), rows: filt};
   }
 
-  function refreshKPIs(){
-    const {avg} = applyFilters();
+  function refresh(){
+    const {avg, rows} = applyFilters();
     fillKPIsFromAvg(avg);
+    renderLog(rows);
   }
 
-  teamSel.addEventListener('change', refreshKPIs);
-  refreshKPIs();
+  teamSel.addEventListener('change', refresh);
+  refresh();
   await renderRank(me, teams);
 }
 window.addEventListener('DOMContentLoaded', init);

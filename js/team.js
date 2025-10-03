@@ -1,13 +1,34 @@
 import { initThemeToggle, loadJSON, fetchCsv, computePlayerAverages } from './app.js';
 
 const Q = s => document.querySelector(s);
+const fmt = v => (v==null || v==='') ? '—' : v;
+
+// --------- helpers for team/game data ----------
+const INDEX_CSV = "https://docs.google.com/spreadsheets/d/15zxpQZJamQfEz07qFtZAI_738cI2rjc2qrrz-q-8Bo0/export?format=csv&gid=0";
+
+function parseRows(text){
+  const lines = text.trim().split(/\r?\n/);
+  const heads = lines[0].split(',').map(h=>h.trim().toLowerCase());
+  const out=[];
+  for(let i=1;i<lines.length;i++){
+    const cols = lines[i].split(',').map(s=>s.trim());
+    const obj={};
+    heads.forEach((h,ix)=> obj[h] = cols[ix] ?? '');
+    out.push(obj);
+  }
+  return out;
+}
+
+async function loadIndex(){
+  const res = await fetch(INDEX_CSV, {cache: 'no-store'});
+  const txt = await res.text();
+  return parseRows(txt);
+}
+
 const slugify = s => (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const norm = s => (s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-const matchTeam = (cell, team) => {
-  const cSlug=slugify(cell), cNorm=norm(cell), tSlug=slugify(team.slug), tNorm=norm(team.name);
-  return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
-};
 
+// --------- Roster ----------
 async function renderRoster(team, players){
   const grid = Q('#roster-grid'); if(!grid) return;
   grid.innerHTML='';
@@ -19,6 +40,39 @@ async function renderRoster(team, players){
     grid.appendChild(a);
   });
 }
+
+// --------- Banner & Record + Game Log ----------
+async function renderHeaderAndLog(team){
+  const games = await loadIndex();
+  const title = Q('#team-name'); if(title) title.textContent = team.name;
+
+  const rec = games.reduce((acc,g)=>{
+    const is1 = g.team1_slug===team.slug, is2 = g.team2_slug===team.slug;
+    if(!(is1||is2)) return acc;
+    const s1 = Number(g.score_team1||0), s2 = Number(g.score_team2||0);
+    const win = is1 ? s1>s2 : s2>s1;
+    if(win) acc.w++; else acc.l++; return acc;
+  }, {w:0,l:0});
+  const recEl = Q('#team-record'); if(recEl) recEl.textContent = `Record: ${rec.w}-${rec.l}`;
+
+  const tb = Q('#team-games-body'); if(tb){
+    tb.innerHTML='';
+    games.filter(g => g.team1_slug===team.slug || g.team2_slug===team.slug).forEach(g => {
+      const tr = document.createElement('tr');
+      const score = `${g.score_team1||0} - ${g.score_team2||0}`;
+      const win = (g.team1_slug===team.slug) ? (Number(g.score_team1||0) > Number(g.score_team2||0))
+                                             : (Number(g.score_team2||0) > Number(g.score_team1||0));
+      tr.innerHTML = `<td>${fmt(g.date)}</td><td>${fmt(`${g.team1_slug} vs ${g.team2_slug}`)}</td><td>${score}</td><td>${win?'<span class="badge-win">W</span>':'<span class="badge-loss">L</span>'}</td><td>${fmt(g.season)}</td>`;
+      tb.appendChild(tr);
+    });
+  }
+}
+
+// --------- Leaders (leaders.json first, fallback to live compute) ----------
+const matchTeam = (cell, team) => {
+  const cSlug=slugify(cell), cNorm=norm(cell), tSlug=slugify(team.slug), tNorm=norm(team.name);
+  return cSlug===tSlug || cSlug.includes(tSlug) || cNorm===tNorm || cNorm.includes(tNorm);
+};
 
 async function renderLeaders(team){
   const host = Q('#team-leaders'); if(!host) return;
@@ -101,7 +155,9 @@ async function init(){
   const slug = new URL(location.href).searchParams.get('team');
   const team = teams.find(t=>t.slug===slug);
   if(!team) return;
-  renderRoster(team, players);
+
+  await renderHeaderAndLog(team);
+  await renderRoster(team, players);
   await renderLeaders(team);
 }
 window.addEventListener('DOMContentLoaded', init);
