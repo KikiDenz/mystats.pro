@@ -17,17 +17,34 @@ const teamMatch = (cell, slug, name) => {
 };
 
 async function parseCsv(url){
-  const res = await fetch(url, { cache: "no-store" });
-  if(!res.ok) throw new Error(`Fetch failed ${res.status} ${url}`);
-  const text = await res.text();
+  // bust Google cache so the latest game is always included
+  const cacheBusted = `${url}${url.includes('?') ? '&' : '?'}_=${Date.now()}`;
+
+  // small retry-once helper in case of a transient 5xx
+  async function fetchText(u){
+    const res = await fetch(u, { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
+    if (!res.ok) throw new Error(`Fetch failed ${res.status} ${u}`);
+    return res.text();
+  }
+
+  let text;
+  try {
+    console.log("Fetching CSV:", cacheBusted);
+    text = await fetchText(cacheBusted);
+  } catch (e) {
+    console.warn("Fetch failed once, retrying:", e.message);
+    const retryUrl = `${url}${url.includes('?') ? '&' : '?'}_=${Date.now()+1}`;
+    text = await fetchText(retryUrl);
+  }
+
   const lines = text.trim().split(/\r?\n/);
   const headers = lines[0].split(",").map(s=>s.trim());
   const rows = [];
-  for(let i=1;i<lines.length;i++){
-    if(!lines[i]) continue;
+  for (let i = 1; i < lines.length; i++) {
+    if (!lines[i]) continue;
     const parts = lines[i].split(",");
     const row = {};
-    headers.forEach((h,idx)=> row[h] = (parts[idx]||"").trim());
+    headers.forEach((h, idx) => row[h] = (parts[idx] || "").trim());
     rows.push(row);
   }
   return rows;
