@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-10-27T04:27:49.601Z",
+  "generated_at": "2025-10-27T05:02:00.512Z",
   "version": 1,
   "teams": {
     "pretty-good": {
@@ -1891,35 +1891,35 @@
           "playerId": "findlay-wendtman",
           "name": "Findlay Wendtman",
           "avg": {
-            "pts": 8.666666666666666,
-            "trb": 4,
-            "ast": 2.5,
-            "stl": 2.3333333333333335,
-            "blk": 0.6666666666666666,
-            "tov": 1.3333333333333333,
-            "fgm": 3.3333333333333335,
-            "fga": 8.833333333333334,
-            "3pm": 1.6666666666666667,
-            "3pa": 4.5,
-            "oreb": 0.6666666666666666,
-            "dreb": 3.3333333333333335,
-            "fgPct": 0.37735849056603776,
-            "tpPct": 0.37037037037037035,
+            "pts": 8.428571428571429,
+            "trb": 3.7142857142857144,
+            "ast": 2.7142857142857144,
+            "stl": 2.2857142857142856,
+            "blk": 1,
+            "tov": 1.2857142857142858,
+            "fgm": 3.2857142857142856,
+            "fga": 8.428571428571429,
+            "3pm": 1.5714285714285714,
+            "3pa": 4.142857142857143,
+            "oreb": 0.5714285714285714,
+            "dreb": 3.142857142857143,
+            "fgPct": 0.3898305084745763,
+            "tpPct": 0.3793103448275862,
             "ftPct": 0.5
           },
           "tot": {
-            "pts": 52,
-            "trb": 24,
-            "ast": 15,
-            "stl": 14,
-            "blk": 4,
-            "tov": 8,
-            "fgm": 20,
-            "fga": 53,
-            "3pm": 10,
-            "3pa": 27,
+            "pts": 59,
+            "trb": 26,
+            "ast": 19,
+            "stl": 16,
+            "blk": 7,
+            "tov": 9,
+            "fgm": 23,
+            "fga": 59,
+            "3pm": 11,
+            "3pa": 29,
             "oreb": 4,
-            "dreb": 20
+            "dreb": 22
           }
         },
         {
@@ -1964,7 +1964,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 8.666666666666666
+              "value": 8.428571428571429
             },
             {
               "playerId": "jackson-neaves",
@@ -1981,14 +1981,14 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 4
+              "value": 3.7142857142857144
             }
           ],
           "ast": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 2.5
+              "value": 2.7142857142857144
             },
             {
               "playerId": "jackson-neaves",
@@ -2000,7 +2000,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 2.3333333333333335
+              "value": 2.2857142857142856
             },
             {
               "playerId": "jackson-neaves",
@@ -2017,14 +2017,14 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 0.6666666666666666
+              "value": 1
             }
           ],
           "tov": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 1.3333333333333333
+              "value": 1.2857142857142858
             },
             {
               "playerId": "jackson-neaves",
@@ -2036,7 +2036,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 3.3333333333333335
+              "value": 3.2857142857142856
             },
             {
               "playerId": "jackson-neaves",
@@ -2048,7 +2048,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 8.833333333333334
+              "value": 8.428571428571429
             },
             {
               "playerId": "jackson-neaves",
@@ -2060,7 +2060,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 1.6666666666666667
+              "value": 1.5714285714285714
             },
             {
               "playerId": "jackson-neaves",
@@ -2072,7 +2072,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 4.5
+              "value": 4.142857142857143
             },
             {
               "playerId": "jackson-neaves",
@@ -2089,7 +2089,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 0.6666666666666666
+              "value": 0.5714285714285714
             }
           ],
           "dreb": [
@@ -2101,7 +2101,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 3.3333333333333335
+              "value": 3.142857142857143
             }
           ]
         },
@@ -2110,7 +2110,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 52
+              "value": 59
             },
             {
               "playerId": "jackson-neaves",
@@ -2127,14 +2127,14 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 24
+              "value": 26
             }
           ],
           "ast": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 15
+              "value": 19
             },
             {
               "playerId": "jackson-neaves",
@@ -2146,7 +2146,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 14
+              "value": 16
             },
             {
               "playerId": "jackson-neaves",
@@ -2156,21 +2156,21 @@
           ],
           "blk": [
             {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 7
+            },
+            {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
               "value": 5
-            },
-            {
-              "playerId": "findlay-wendtman",
-              "name": "Findlay Wendtman",
-              "value": 4
             }
           ],
           "tov": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 8
+              "value": 9
             },
             {
               "playerId": "jackson-neaves",
@@ -2182,7 +2182,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 20
+              "value": 23
             },
             {
               "playerId": "jackson-neaves",
@@ -2194,7 +2194,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 53
+              "value": 59
             },
             {
               "playerId": "jackson-neaves",
@@ -2206,7 +2206,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 10
+              "value": 11
             },
             {
               "playerId": "jackson-neaves",
@@ -2218,7 +2218,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 27
+              "value": 29
             },
             {
               "playerId": "jackson-neaves",
@@ -2247,7 +2247,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 20
+              "value": 22
             }
           ]
         }
