@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-10-31T06:27:05.569Z",
+  "generated_at": "2025-10-31T07:16:45.588Z",
   "version": 1,
   "teams": {
     "pretty-good": {
@@ -1891,53 +1891,53 @@
           "playerId": "findlay-wendtman",
           "name": "Findlay Wendtman",
           "avg": {
-            "pts": 9.5,
-            "trb": 3.8,
-            "ast": 2.5,
-            "stl": 2.8,
-            "blk": 0.7,
-            "tov": 1.2,
-            "fgm": 3.8,
-            "fga": 9.5,
-            "3pm": 1.1,
-            "3pa": 3.5,
-            "oreb": 1,
-            "dreb": 2.8,
-            "fgPct": 0.4,
-            "tpPct": 0.3142857142857143,
-            "ftPct": 0.8
+            "pts": 8.875,
+            "trb": 3.75,
+            "ast": 2.625,
+            "stl": 2.5,
+            "blk": 0.875,
+            "tov": 1.25,
+            "fgm": 3.5,
+            "fga": 8.875,
+            "3pm": 1.375,
+            "3pa": 3.875,
+            "oreb": 0.75,
+            "dreb": 3,
+            "fgPct": 0.39436619718309857,
+            "tpPct": 0.3548387096774194,
+            "ftPct": 0.6666666666666666
           },
           "tot": {
-            "pts": 95,
-            "trb": 38,
-            "ast": 25,
-            "stl": 28,
+            "pts": 71,
+            "trb": 30,
+            "ast": 21,
+            "stl": 20,
             "blk": 7,
-            "tov": 12,
-            "fgm": 38,
-            "fga": 95,
+            "tov": 10,
+            "fgm": 28,
+            "fga": 71,
             "3pm": 11,
-            "3pa": 35,
-            "oreb": 10,
-            "dreb": 28
+            "3pa": 31,
+            "oreb": 6,
+            "dreb": 24
           }
         },
         {
           "playerId": "jackson-neaves",
           "name": "Jackson Neaves",
           "avg": {
-            "pts": 2.142857142857143,
-            "trb": 4.142857142857143,
-            "ast": 0.14285714285714285,
-            "stl": 0.5714285714285714,
-            "blk": 0.7142857142857143,
-            "tov": 0.7142857142857143,
-            "fgm": 0.5714285714285714,
-            "fga": 1.8571428571428572,
+            "pts": 3.75,
+            "trb": 7.25,
+            "ast": 0.25,
+            "stl": 1,
+            "blk": 1.25,
+            "tov": 1.25,
+            "fgm": 1,
+            "fga": 3.25,
             "3pm": 0,
-            "3pa": 0.42857142857142855,
-            "oreb": 0.7142857142857143,
-            "dreb": 3.4285714285714284,
+            "3pa": 0.75,
+            "oreb": 1.25,
+            "dreb": 6,
             "fgPct": 0.3076923076923077,
             "tpPct": 0,
             "ftPct": 0.5833333333333334
@@ -1964,27 +1964,39 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 9.5
+              "value": 8.875
             },
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 2.142857142857143
+              "value": 3.75
             }
           ],
           "trb": [
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 4.142857142857143
+              "value": 7.25
             },
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 3.8
+              "value": 3.75
             }
           ],
           "ast": [
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 2.625
+            },
+            {
+              "playerId": "jackson-neaves",
+              "name": "Jackson Neaves",
+              "value": 0.25
+            }
+          ],
+          "stl": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
@@ -1993,74 +2005,62 @@
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 0.14285714285714285
-            }
-          ],
-          "stl": [
-            {
-              "playerId": "findlay-wendtman",
-              "name": "Findlay Wendtman",
-              "value": 2.8
-            },
-            {
-              "playerId": "jackson-neaves",
-              "name": "Jackson Neaves",
-              "value": 0.5714285714285714
+              "value": 1
             }
           ],
           "blk": [
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 0.7142857142857143
+              "value": 1.25
             },
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 0.7
+              "value": 0.875
             }
           ],
           "tov": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 1.2
+              "value": 1.25
             },
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 0.7142857142857143
+              "value": 1.25
             }
           ],
           "fgm": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 3.8
+              "value": 3.5
             },
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 0.5714285714285714
+              "value": 1
             }
           ],
           "fga": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 9.5
+              "value": 8.875
             },
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 1.8571428571428572
+              "value": 3.25
             }
           ],
           "3pm": [
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 1.1
+              "value": 1.375
             },
             {
               "playerId": "jackson-neaves",
@@ -2072,36 +2072,36 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 3.5
+              "value": 3.875
             },
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 0.42857142857142855
+              "value": 0.75
             }
           ],
           "oreb": [
             {
-              "playerId": "findlay-wendtman",
-              "name": "Findlay Wendtman",
-              "value": 1
-            },
-            {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 0.7142857142857143
+              "value": 1.25
+            },
+            {
+              "playerId": "findlay-wendtman",
+              "name": "Findlay Wendtman",
+              "value": 0.75
             }
           ],
           "dreb": [
             {
               "playerId": "jackson-neaves",
               "name": "Jackson Neaves",
-              "value": 3.4285714285714284
+              "value": 6
             },
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 2.8
+              "value": 3
             }
           ]
         },
@@ -2110,7 +2110,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 95
+              "value": 71
             },
             {
               "playerId": "jackson-neaves",
@@ -2122,7 +2122,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 38
+              "value": 30
             },
             {
               "playerId": "jackson-neaves",
@@ -2134,7 +2134,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 25
+              "value": 21
             },
             {
               "playerId": "jackson-neaves",
@@ -2146,7 +2146,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 28
+              "value": 20
             },
             {
               "playerId": "jackson-neaves",
@@ -2170,7 +2170,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 12
+              "value": 10
             },
             {
               "playerId": "jackson-neaves",
@@ -2182,7 +2182,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 38
+              "value": 28
             },
             {
               "playerId": "jackson-neaves",
@@ -2194,7 +2194,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 95
+              "value": 71
             },
             {
               "playerId": "jackson-neaves",
@@ -2218,7 +2218,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 35
+              "value": 31
             },
             {
               "playerId": "jackson-neaves",
@@ -2230,7 +2230,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 10
+              "value": 6
             },
             {
               "playerId": "jackson-neaves",
@@ -2242,7 +2242,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 28
+              "value": 24
             },
             {
               "playerId": "jackson-neaves",
