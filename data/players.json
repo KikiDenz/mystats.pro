@@ -92,6 +92,17 @@
     "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=430866216&single=true&output=csv"
   },
   {
+    "slug": "ethan-todd",
+    "name": "Ethan Todd",
+    "number": "27",
+    "position": "Guard",
+    "image": "assets/placeholder1.png",
+    "teams": [
+      "pretty-good"
+    ],
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsO8Qs1fCs3bth-xMxciqAX0CchbqLYOpQbfOQvf8xJdpSkNl3109OEwuvfWYehtQX5a6LUqeIFdsg/pub?gid=450610169&single=true&output=csv"
+  },
+  {
     "slug": "codey-nowland",
     "name": "Codey Nowland",
     "number": "00",
