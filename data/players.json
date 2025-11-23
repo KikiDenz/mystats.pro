@@ -4,7 +4,7 @@
     "name": "Kyle Denzin",
     "number": "37",
     "position": "Guard",
-    "image": "assets/kyle-denzin.png?v=2",
+    "image": "assets/placeholderkd.png?v=2",
     "teams": [
       "pretty-good",
       "sweaty-already",
@@ -40,7 +40,7 @@
     "name": "Jackson Neaves",
     "number": "10",
     "position": "Center",
-    "image": "assets/placeholder1.png",
+    "image": "assets/placeholder4.png",
     "teams": [
       "pretty-good",
       "chuckers-chuckers"
@@ -63,7 +63,7 @@
     "name": "Rhys Ogle",
     "number": "6",
     "position": "Forward",
-    "image": "assets/placeholder2.png",
+    "image": "assets/placeholder7.png",
     "teams": [
       "pretty-good"
     ],
@@ -74,7 +74,7 @@
     "name": "Jarren Owen",
     "number": "5",
     "position": "Guard",
-    "image": "assets/placeholder1.png",
+    "image": "assets/placeholder5.png",
     "teams": [
       "pretty-good"
     ],
@@ -85,7 +85,7 @@
     "name": "Callan Beamish",
     "number": "21",
     "position": "Center",
-    "image": "assets/placeholder2.png",
+    "image": "assets/placeholder3.png",
     "teams": [
       "pretty-good"
     ],
@@ -96,7 +96,7 @@
     "name": "Ethan Todd",
     "number": "27",
     "position": "Guard",
-    "image": "assets/placeholder1.png",
+    "image": "assets/placeholder6.png",
     "teams": [
       "pretty-good"
     ],
