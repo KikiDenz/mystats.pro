@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-06T05:17:31.165Z",
+  "generated_at": "2025-12-06T06:26:13.119Z",
   "version": 1,
   "teams": {
     "pretty-good": {
@@ -1463,35 +1463,35 @@
           "playerId": "kyle-denzin",
           "name": "Kyle Denzin",
           "avg": {
-            "pts": 17,
-            "trb": 11,
-            "ast": 7,
-            "stl": 2,
+            "pts": 0,
+            "trb": 0,
+            "ast": 0,
+            "stl": 0,
             "blk": 0,
             "tov": 0,
-            "fgm": 7,
-            "fga": 18,
-            "3pm": 3,
-            "3pa": 9,
-            "oreb": 4,
-            "dreb": 7,
-            "fgPct": 0.3888888888888889,
-            "tpPct": 0.3333333333333333,
+            "fgm": 0,
+            "fga": 0,
+            "3pm": 0,
+            "3pa": 0,
+            "oreb": 0,
+            "dreb": 0,
+            "fgPct": 0,
+            "tpPct": 0,
             "ftPct": 0
           },
           "tot": {
-            "pts": 17,
-            "trb": 11,
-            "ast": 7,
-            "stl": 2,
+            "pts": 0,
+            "trb": 0,
+            "ast": 0,
+            "stl": 0,
             "blk": 0,
             "tov": 0,
-            "fgm": 7,
-            "fga": 18,
-            "3pm": 3,
-            "3pa": 9,
-            "oreb": 4,
-            "dreb": 7
+            "fgm": 0,
+            "fga": 0,
+            "3pm": 0,
+            "3pa": 0,
+            "oreb": 0,
+            "dreb": 0
           }
         }
       ],
@@ -1501,28 +1501,28 @@
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 17
+              "value": 0
             }
           ],
           "trb": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 11
+              "value": 0
             }
           ],
           "ast": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 7
+              "value": 0
             }
           ],
           "stl": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 2
+              "value": 0
             }
           ],
           "blk": [
@@ -1543,42 +1543,42 @@
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 7
+              "value": 0
             }
           ],
           "fga": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 18
+              "value": 0
             }
           ],
           "3pm": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 3
+              "value": 0
             }
           ],
           "3pa": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 9
+              "value": 0
             }
           ],
           "oreb": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 4
+              "value": 0
             }
           ],
           "dreb": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 7
+              "value": 0
             }
           ]
         },
@@ -1587,28 +1587,28 @@
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 17
+              "value": 0
             }
           ],
           "trb": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 11
+              "value": 0
             }
           ],
           "ast": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 7
+              "value": 0
             }
           ],
           "stl": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 2
+              "value": 0
             }
           ],
           "blk": [
@@ -1629,42 +1629,42 @@
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 7
+              "value": 0
             }
           ],
           "fga": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 18
+              "value": 0
             }
           ],
           "3pm": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 3
+              "value": 0
             }
           ],
           "3pa": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 9
+              "value": 0
             }
           ],
           "oreb": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 4
+              "value": 0
             }
           ],
           "dreb": [
             {
               "playerId": "kyle-denzin",
               "name": "Kyle Denzin",
-              "value": 7
+              "value": 0
             }
           ]
         }
@@ -1712,35 +1712,35 @@
           "playerId": "kyle-denzin",
           "name": "Kyle Denzin",
           "avg": {
-            "pts": 15,
-            "trb": 10,
-            "ast": 7,
-            "stl": 3,
+            "pts": 0,
+            "trb": 0,
+            "ast": 0,
+            "stl": 0,
             "blk": 0,
-            "tov": 4,
-            "fgm": 6,
-            "fga": 19,
-            "3pm": 3,
-            "3pa": 13,
-            "oreb": 5,
-            "dreb": 5,
-            "fgPct": 0.3157894736842105,
-            "tpPct": 0.23076923076923078,
+            "tov": 0,
+            "fgm": 0,
+            "fga": 0,
+            "3pm": 0,
+            "3pa": 0,
+            "oreb": 0,
+            "dreb": 0,
+            "fgPct": 0,
+            "tpPct": 0,
             "ftPct": 0
           },
           "tot": {
-            "pts": 15,
-            "trb": 10,
-            "ast": 7,
-            "stl": 3,
+            "pts": 0,
+            "trb": 0,
+            "ast": 0,
+            "stl": 0,
             "blk": 0,
-            "tov": 4,
-            "fgm": 6,
-            "fga": 19,
-            "3pm": 3,
-            "3pa": 13,
-            "oreb": 5,
-            "dreb": 5
+            "tov": 0,
+            "fgm": 0,
+            "fga": 0,
+            "3pm": 0,
+            "3pa": 0,
+            "oreb": 0,
+            "dreb": 0
           }
         }
       ],
@@ -1748,49 +1748,49 @@
         "avg": {
           "pts": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 15
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "trb": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 10
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "ast": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 7
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "stl": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 3
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
@@ -1808,85 +1808,85 @@
           ],
           "tov": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 4
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "fgm": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 6
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "fga": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 19
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "3pm": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 3
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "3pa": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 13
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "oreb": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 5
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "dreb": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 5
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ]
@@ -1894,49 +1894,49 @@
         "tot": {
           "pts": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 15
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "trb": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 10
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "ast": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 7
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "stl": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 3
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
@@ -1954,85 +1954,85 @@
           ],
           "tov": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 4
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "fgm": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 6
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "fga": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 19
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "3pm": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 3
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "3pa": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 13
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "oreb": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 5
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ],
           "dreb": [
             {
-              "playerId": "kyle-denzin",
-              "name": "Kyle Denzin",
-              "value": 5
-            },
-            {
               "playerId": "codey-nowland",
               "name": "Codey Nowland",
+              "value": 0
+            },
+            {
+              "playerId": "kyle-denzin",
+              "name": "Kyle Denzin",
               "value": 0
             }
           ]
