@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-09T11:00:25.911Z",
+  "generated_at": "2025-12-09T11:09:42.163Z",
   "version": 1,
   "teams": {
     "pretty-good": {
@@ -83,7 +83,7 @@
             "trb": 2.25,
             "ast": 4.666666666666667,
             "stl": 2.0833333333333335,
-            "blk": 0.3333333333333333,
+            "blk": 0.4166666666666667,
             "tov": 2,
             "fgm": 4,
             "fga": 9.666666666666666,
@@ -100,7 +100,7 @@
             "trb": 27,
             "ast": 56,
             "stl": 25,
-            "blk": 4,
+            "blk": 5,
             "tov": 24,
             "fgm": 48,
             "fga": 116,
@@ -223,7 +223,7 @@
             "trb": 3.6666666666666665,
             "ast": 4.833333333333333,
             "stl": 1.8333333333333333,
-            "blk": 0.16666666666666666,
+            "blk": 0.25,
             "tov": 1.5,
             "fgm": 2.3333333333333335,
             "fga": 7.416666666666667,
@@ -240,7 +240,7 @@
             "trb": 44,
             "ast": 58,
             "stl": 22,
-            "blk": 2,
+            "blk": 3,
             "tov": 18,
             "fgm": 28,
             "fga": 89,
@@ -535,7 +535,7 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 0.3333333333333333
+              "value": 0.4166666666666667
             },
             {
               "playerId": "levi-denzin",
@@ -545,7 +545,7 @@
             {
               "playerId": "jarren-owen",
               "name": "Jarren Owen",
-              "value": 0.16666666666666666
+              "value": 0.25
             },
             {
               "playerId": "kyle-denzin",
@@ -1101,16 +1101,16 @@
             {
               "playerId": "findlay-wendtman",
               "name": "Findlay Wendtman",
-              "value": 4
-            },
-            {
-              "playerId": "levi-denzin",
-              "name": "Levi Denzin",
-              "value": 2
+              "value": 5
             },
             {
               "playerId": "jarren-owen",
               "name": "Jarren Owen",
+              "value": 3
+            },
+            {
+              "playerId": "levi-denzin",
+              "name": "Levi Denzin",
               "value": 2
             },
             {
